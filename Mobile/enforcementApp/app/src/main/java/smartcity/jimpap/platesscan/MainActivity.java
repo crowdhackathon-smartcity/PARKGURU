@@ -1,4 +1,4 @@
-package redmovievibecom.jimpap.platesscan;
+package smartcity.jimpap.platesscan;
 
 import android.Manifest;
 import android.app.Activity;

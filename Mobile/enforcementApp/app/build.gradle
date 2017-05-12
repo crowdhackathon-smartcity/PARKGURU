@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "redmovievibecom.jimpap.platesscan"
+        applicationId "smartcity.jimpap.platesscan"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
