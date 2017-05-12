@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/EnforcementAppSmartCity.iml" filepath="$PROJECT_DIR$/EnforcementAppSmartCity.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/enforcementApp.iml" filepath="$PROJECT_DIR$/enforcementApp.iml" />
     </modules>
   </component>
 </project>
