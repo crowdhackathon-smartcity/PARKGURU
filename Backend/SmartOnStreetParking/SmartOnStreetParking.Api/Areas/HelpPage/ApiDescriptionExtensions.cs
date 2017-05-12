@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage
+namespace SmartOnStreetParkingAPI.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

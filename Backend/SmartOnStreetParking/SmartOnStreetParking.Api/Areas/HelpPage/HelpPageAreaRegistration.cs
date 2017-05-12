@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage
+namespace SmartOnStreetParkingAPI.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

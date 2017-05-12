@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions;
-using SmartOnStreetParking.Api.Areas.HelpPage.Models;
+using SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions;
+using SmartOnStreetParkingAPI.Areas.HelpPage.Models;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage
+namespace SmartOnStreetParkingAPI.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

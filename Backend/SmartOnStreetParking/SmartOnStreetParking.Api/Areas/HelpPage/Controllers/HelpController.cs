@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions;
-using SmartOnStreetParking.Api.Areas.HelpPage.Models;
+using SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions;
+using SmartOnStreetParkingAPI.Areas.HelpPage.Models;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage.Controllers
+namespace SmartOnStreetParkingAPI.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

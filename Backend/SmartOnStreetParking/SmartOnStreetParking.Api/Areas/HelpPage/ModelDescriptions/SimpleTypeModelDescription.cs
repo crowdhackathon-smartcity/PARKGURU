@@ -1,4 +1,4 @@
-namespace SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions
+namespace SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions
 {
     public class SimpleTypeModelDescription : ModelDescription
     {

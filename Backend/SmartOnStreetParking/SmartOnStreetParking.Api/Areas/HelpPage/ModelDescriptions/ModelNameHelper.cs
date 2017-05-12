@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions
+namespace SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

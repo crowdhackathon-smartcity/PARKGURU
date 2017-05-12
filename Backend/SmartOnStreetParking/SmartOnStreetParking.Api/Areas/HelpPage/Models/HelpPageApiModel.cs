@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions;
+using SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage.Models
+namespace SmartOnStreetParkingAPI.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

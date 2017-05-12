@@ -1,6 +1,6 @@
 using System;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions
+namespace SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

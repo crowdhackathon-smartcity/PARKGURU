@@ -1,4 +1,4 @@
-namespace SmartOnStreetParking.Api.Areas.HelpPage
+namespace SmartOnStreetParkingAPI.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

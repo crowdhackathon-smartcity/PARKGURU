@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace SmartOnStreetParking.Api.Areas.HelpPage.ModelDescriptions
+namespace SmartOnStreetParkingAPI.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {
