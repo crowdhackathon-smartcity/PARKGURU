@@ -9,17 +9,17 @@ namespace SmartOnStreetParking.Models.Enums
 {
     public enum AvailabilityState : int
     {
-        [Display(Name = "Unknown", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Unknown")]
         Unknown = 0,
-        [Display(Name = "NoSpace", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "NoSpace")]
         NoSpace = 1,
-        [Display(Name = "Limited", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Limited")]
         Limited = 2,
-        [Display(Name = "Medium", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Medium")]
         Medium = 3,
-        [Display(Name = "High", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "High")]
         High = 4,
-        [Display(Name = "Closed", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "Closed")]
         Closed = 5
     };
 }
