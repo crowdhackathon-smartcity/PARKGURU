@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using SmartOnStreetParking.Web.Models;
 
+
 namespace SmartOnStreetParking.Web
 {
     public partial class Startup

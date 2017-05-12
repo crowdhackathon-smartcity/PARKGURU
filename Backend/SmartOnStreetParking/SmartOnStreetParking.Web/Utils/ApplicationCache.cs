@@ -1,15 +1,15 @@
-﻿using SmartOnStreetParking.Models;
-using SmartOnStreetParking.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
 using System.Security.AccessControl;
 using System.Web;
+using System.Runtime.Caching;
+using SmartOnStreetParking.Models;
+using SmartOnStreetParking.Repositories;
 
 namespace SmartOnStreetParking.Web.Utils
 {
-    public static class ApplicationCache
+    public class ApplicationCache
     {
         private static ObjectCache _AppCache = MemoryCache.Default;
 

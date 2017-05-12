@@ -13,7 +13,7 @@ namespace SmartOnStreetParking.Web.Extensions
         {
             var claim = ((ClaimsIdentity)identity).FindFirst(PropertyName);
             // Test for null to avoid issues during local testing
-            return (claim != null) ? claim.Value : "0";
+            return (claim != null) ? claim.Value : string.Empty;
         }
     }
 

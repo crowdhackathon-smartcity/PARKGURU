@@ -21,11 +21,17 @@ namespace SmartOnStreetParking.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/custom.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/custom.css"));
+
+            bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
+                        "~/Content/font-awesome/font-awesome.min.css"));
+
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using SmartOnStreetParking.Models.Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SmartOnStreetParking.Resources;
 
 namespace SmartOnStreetParking.Web.Models
 {
@@ -67,18 +69,29 @@ namespace SmartOnStreetParking.Web.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name= "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm password", Prompt ="Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} cannot be more than {1} characters long.")]
+        [Display(Name = "Name")]
+        public string MemberName { get; set; }
+
+        [Required]
+        [Display( Name = "Type")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid type.")]
+        public MemberType Type { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -12,7 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SmartOnStreetParking.Web.Models;
 
-namespace SmartOnStreetParking.Web
+namespace SmartOnStreetParking
 {
     public class EmailService : IIdentityMessageService
     {

@@ -12,6 +12,8 @@ namespace SmartOnStreetParking.Web.Models
     {
         public Int64 Member_Id { get; set; }
 
+
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -19,8 +21,13 @@ namespace SmartOnStreetParking.Web.Models
             // Add custom user claims here
             userIdentity.AddClaim(new Claim("Member_Id", this.Member_Id.ToString()));
 
+
+
             return userIdentity;
         }
+
+
+        //usage var value = User.Identity.GetProperty("Member_Id);
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
