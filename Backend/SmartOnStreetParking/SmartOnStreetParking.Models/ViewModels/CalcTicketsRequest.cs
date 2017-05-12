@@ -11,5 +11,6 @@ namespace SmartOnStreetParking.Models.ViewModels
 
         public long SpotId { get; set; }
         public int Duration { get; set; }
+        public string VehiclePlate { get; set; }
     }
 }

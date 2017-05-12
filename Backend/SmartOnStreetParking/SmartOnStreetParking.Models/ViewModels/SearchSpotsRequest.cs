@@ -11,9 +11,8 @@ namespace SmartOnStreetParking.Models.ViewModels
 
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-
         public int Duration { get; set; }
-
         public int SearchDistance { get; set; }
+        public string VehiclePlate { get; set; }
     }
 }
