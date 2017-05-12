@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "InternalServerError";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+
+
+<div class="middle-box text-center">
+    <h1>500</h1>
+    <h3>Internal Server Error</h3>
+    <p style="color:#ED5565;">
+        
+        <strong>Error Details: &nbsp; @TempData["CustomError"]</strong>
+    </p>
+    <div class="error-desc">
+        The server encountered something unexpected that didn't allow it to complete the request. We apologize.<br />
+        You can go back to the previous page: <br /><a class="btn btn-primary m-t" onclick="window.history.back();">Back</a>
+    </div>
+</div>
