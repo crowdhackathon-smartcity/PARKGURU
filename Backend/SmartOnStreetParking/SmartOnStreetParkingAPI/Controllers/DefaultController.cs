@@ -1,4 +1,5 @@
 ﻿using SmartOnStreetParking.API.AuthorizeAPIRequest;
+using SmartOnStreetParking.Models;
 using SmartOnStreetParking.Models.ViewModels;
 using SmartOnStreetParking.Repositories;
 using System;
@@ -47,7 +48,7 @@ namespace SmartOnStreetParking.API.Controllers
         /// </summary>
         /// <param name="SearchSpotsRequest">The class that contains requested parameters</param>
         /// <returns>The array of parking spots</returns>
-        [ResponseType(typeof(List<ParkingSpotResponse>))]
+        [ResponseType(typeof(Payment))]
         [HttpPost]
         public IHttpActionResult Pay(PayRequest PayRequest)
         {
