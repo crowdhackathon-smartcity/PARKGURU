@@ -194,6 +194,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ZoneController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -301,6 +302,8 @@
     <Content Include="Views\Zone\Index_old.cshtml" />
     <Content Include="Views\Zone\Index.cshtml" />
     <Content Include="Views\Zone\Add.cshtml" />
+    <Content Include="Views\Shared\_Navigation_Dev.cshtml" />
+    <Content Include="Views\Payment\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
