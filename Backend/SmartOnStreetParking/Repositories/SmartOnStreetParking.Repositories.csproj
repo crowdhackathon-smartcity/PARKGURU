@@ -52,6 +52,7 @@
     <Compile Include="DashboardRepository.cs" />
     <Compile Include="IDashboardRepository.cs" />
     <Compile Include="IPaymentRepository.cs" />
+    <Compile Include="IParkingSpotRepository.cs" />
     <Compile Include="IZoneRepository.cs" />
     <Compile Include="MemberRepository.cs" />
     <Compile Include="APIAuth.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ParkingSpotImport\ParkingSpotImportHandler.cs" />
     <Compile Include="ParkingSpotImport\ParkingSpotImportHelper.cs" />
     <Compile Include="PaymentRepository.cs" />
+    <Compile Include="ParkingSpotRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZoneRepository.cs" />
   </ItemGroup>

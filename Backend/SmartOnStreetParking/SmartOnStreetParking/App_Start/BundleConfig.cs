@@ -32,6 +32,9 @@ namespace SmartOnStreetParking.Web
             bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
                         "~/Content/font-awesome/font-awesome.min.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/maps").Include(
+                          "~/Scripts/MapUtils.js",
+                          "~/Scripts/PolygonCreator.js"));
         }
     }
 }

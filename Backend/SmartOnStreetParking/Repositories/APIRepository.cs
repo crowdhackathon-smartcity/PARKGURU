@@ -111,7 +111,10 @@ namespace SmartOnStreetParking.Repositories
             
             while (Duration>0)
             {
-                var BestTicket = Zone.Tickets.Where(u => u.Duration <= Duration).OrderByDescending(i => i.Duration).FirstOrDefault();
+                var BestTicket = Zone.Tickets.Where(u => u.Duration > Duration).OrderBy(i => i.Duration).FirstOrDefault();
+                if (BestTicket == null)
+                    BestTicket = Zone.Tickets.Where(u => u.Duration <= Duration).OrderByDescending(i => i.Duration).FirstOrDefault();
+
                 if (BestTicket == null)
                     break;
                 Ret.Tickets.Add(new Ticket {Duration=BestTicket.Duration, Price=BestTicket.Price, SN=BestTicket.SN });
@@ -123,14 +126,42 @@ namespace SmartOnStreetParking.Repositories
         }
 
 
-        public Payment Pay(PayRequest PayRequest, string ApiKey)
+        public Payment CheckPlate(string VehiclePlate, string APIKey)
         {
+
             using (var DBContext = new SmartOnStreetParkingDbContext())
             {
+                var Payments = DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey && o.Start <= DateTime.UtcNow).ToList();
+
+
+                return Payments.Where(o => o.Start>= DateTime.UtcNow.AddMinutes(-o.Duration)).FirstOrDefault();
+            }
+
+        }
+
+
+        public List<Payment> GetPayments(string VehiclePlate, string APIKey)
+        {
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                return DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey).ToList();
+            }
+
+        }
+
+        public Payment Pay(PayRequest PayRequest)
+        {
+
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+
+                Member Member = DBContext.Members.Where(u => u.ApiKey == PayRequest.APIkey).FirstOrDefault();
                 var Payment = new Payment()
                 {
-                    APIKey = ApiKey,
-                    MemberId=DBContext.Members.Where(u=>u.ApiKey==ApiKey).DefaultIfEmpty().Select(l=>l.Id).FirstOrDefault(),
+                    APIKey = PayRequest.APIkey,
+                    MemberId= Member.Id,
                     Duration = PayRequest.SpotTickets.Tickets.Select(i => i.Duration).DefaultIfEmpty().Sum(),
                     ParkingSpotId=PayRequest.SpotId,
                     VehiclePlate= PayRequest.VehiclePlate,

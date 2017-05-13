@@ -1,4 +1,5 @@
-﻿using SmartOnStreetParking.Models;
+﻿using Newtonsoft.Json;
+using SmartOnStreetParking.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,13 @@ namespace SmartOnStreetParking.Web.Models
 
         public AddZoneViewModel()
         {
-            D1 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Sunday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
-            D2 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Monday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
-            D3 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Tuesday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
-            D4 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Wednesday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
-            D5 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Thursday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
-            D6 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Friday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
-            D7 = new TimeItemViewModel() { Checked = true, Days = DayOfWeek.Saturday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D1 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Sunday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D2 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Monday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D3 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Tuesday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D4 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Wednesday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D5 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Thursday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D6 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Friday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
+            D7 = new TimeItemViewModel() { Checked = false, Days = DayOfWeek.Saturday, Start = new TimeSpan(0, 0, 0, 0), End = new TimeSpan(1, 0, 0, 0) };
         }
 
         public List<ParkingTimeTable> CreateTimeTable()
@@ -64,6 +65,54 @@ namespace SmartOnStreetParking.Web.Models
             }
 
             return RetVal;
+        }
+
+        public void LoadTimeTable()
+        {
+            List<ParkingTimeTable> Items = JsonConvert.DeserializeObject<List<ParkingTimeTable>>(this.TimeTableAsJson);
+
+            foreach (ParkingTimeTable Item in Items)
+            {
+                switch (Item.Days)
+                {
+                    case DayOfWeek.Sunday:
+                        D1.Checked = true;
+                        D1.Start = Item.Start;
+                        D1.End = Item.End;
+                        break;
+                    case DayOfWeek.Monday:
+                        D2.Checked = true;
+                        D2.Start = Item.Start;
+                        D2.End = Item.End;
+                        break;
+                    case DayOfWeek.Tuesday:
+                        D3.Checked = true;
+                        D3.Start = Item.Start;
+                        D3.End = Item.End;
+                        break;
+                    case DayOfWeek.Wednesday:
+                        D4.Checked = true;
+                        D4.Start = Item.Start;
+                        D4.End = Item.End;
+                        break;
+                    case DayOfWeek.Thursday:
+                        D5.Checked = true;
+                        D5.Start = Item.Start;
+                        D5.End = Item.End;
+                        break;
+                    case DayOfWeek.Friday:
+                        D6.Checked = true;
+                        D6.Start = Item.Start;
+                        D6.End = Item.End;
+                        break;
+                    case DayOfWeek.Saturday:
+                        D7.Checked = true;
+                        D7.Start = Item.Start;
+                        D7.End = Item.End;
+                        break;
+                }
+            }
+
         }
     }
 

@@ -40,7 +40,7 @@ namespace UnitTests
             SearchSpotsRequest.Longitude = 23.7356535;
             SearchSpotsRequest.Latitude = 37.9828735;
             SearchSpotsRequest.SearchDistance = 1000;
-            SearchSpotsRequest.Duration = 120;
+            SearchSpotsRequest.Duration = 15;
             SearchSpotsRequest.VehiclePlate = "KPH5144";
             IAPIRepository _APIRepository = new APIRepository();
 
@@ -60,6 +60,14 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void TestCheckPlate()
+        {
+            IAPIRepository _APIRepository = new APIRepository();
+            _APIRepository.CheckPlate("5144", "b82e61fa - 8f2c - 4fcd - 900b - 115aed5fe393");
+
+        }
+
+        [TestMethod]
         public void TestPayments()
         {
             PayRequest PayRequest = new PayRequest();
@@ -69,9 +77,11 @@ namespace UnitTests
             PayRequest.SpotTickets.Tickets = new List<Ticket>();
             PayRequest.SpotTickets.Tickets.Add(new Ticket { Price = 12, Duration=60 });
             PayRequest.VehiclePlate = "KPH5144";
+            PayRequest.APIkey= "b82e61fa-8f2c-4fcd-900b-115aed5fe393";
+            
             IAPIRepository _APIRepository = new APIRepository();
 
-            Payment ForMitsos = _APIRepository.Pay(PayRequest, "b82e61fa-8f2c-4fcd-900b-115aed5fe393");
+            Payment ForMitsos = _APIRepository.Pay(PayRequest);
         }
 
         [TestMethod]

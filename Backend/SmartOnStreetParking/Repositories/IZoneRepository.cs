@@ -14,5 +14,7 @@ namespace SmartOnStreetParking.Repositories
         void Delete(long Id);
 
         List<Zone> GetAll();
+
+        Zone GetById(long Id);
     }
 }

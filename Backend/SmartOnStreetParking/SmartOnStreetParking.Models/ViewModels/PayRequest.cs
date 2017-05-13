@@ -12,5 +12,6 @@ namespace SmartOnStreetParking.Models.ViewModels
         public long SpotId { get; set; }
         public SpotTickets SpotTickets { get; set; }
         public string VehiclePlate { get; set; }
+        public string APIkey { get; set; }
     }
 }
