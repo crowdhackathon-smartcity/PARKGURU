@@ -61,27 +61,13 @@ namespace SmartOnStreetParking.Models
 
 
         /// <summary>
-        /// Max allowed parking duration
+        /// Serialized TimeTable
         /// </summary>        
         [Column("Zone_TimeTable")]
         [JsonIgnore]
-        public string TimeTable
-        { 
-        get
-            {
-                return JsonConvert.SerializeObject(ParkingTimeTable);
-            }
-        set
-            {
-                try
-                {
-                    ParkingTimeTable = JsonConvert.DeserializeObject<List<ParkingTimeTable>>(value == null ? "" : value);
-
-                }
-                catch
-                { }
-                
-            }
+        public string TimeTableAsJson
+        {
+            get;set;
         }
 
 /// <summary>
@@ -90,7 +76,29 @@ namespace SmartOnStreetParking.Models
 [NotMapped]
         public List<ParkingTimeTable> ParkingTimeTable
         {
-            get; set;
+            get
+            {
+                return TimeTableAsJson == null? new List<ParkingTimeTable>() :  JsonConvert.DeserializeObject<List<ParkingTimeTable>>(TimeTableAsJson);
+            }
+            set
+            {
+                try
+                {
+                    if (value == null)
+                    {
+                        TimeTableAsJson = null;
+                    }
+                    else
+                    {
+                        TimeTableAsJson = JsonConvert.SerializeObject(value);
+                    }
+
+
+                }
+                catch
+                { }
+
+            }
         }
 
 
