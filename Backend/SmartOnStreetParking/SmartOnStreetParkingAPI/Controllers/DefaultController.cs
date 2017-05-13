@@ -12,7 +12,7 @@ using System.Web.Http.Description;
 
 namespace SmartOnStreetParking.API.Controllers
 {
-    [MyAuthorizationFilter]
+    //[MyAuthorizationFilter]
     public class DefaultController : ApiController
     {
 
@@ -53,7 +53,7 @@ namespace SmartOnStreetParking.API.Controllers
         public IHttpActionResult Pay(PayRequest PayRequest)
         {
 
-            return Ok(_APIRepository.Pay(PayRequest, RequestContext.Principal.Identity.Name));
+            return Ok(_APIRepository.Pay(PayRequest, PayRequest.APIkey));
         }
 
         /// <summary>
