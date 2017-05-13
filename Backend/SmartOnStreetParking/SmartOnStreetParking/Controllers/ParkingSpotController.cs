@@ -138,7 +138,7 @@ namespace SmartOnStreetParking.Web.Controllers
                     DateCreated = DateTime.UtcNow,
                     Deleted = false,
                     ReferenceId= Spot.ReferenceId,
-                    GeometryType = GeometryType.Line,
+                    GeometryType = Spot.Edges.Count==1 ? GeometryType.Point :  GeometryType.Line,
                     Name= Spot.StreetAddress,
 
 
