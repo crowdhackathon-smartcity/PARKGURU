@@ -122,14 +122,39 @@ namespace SmartOnStreetParking.Repositories
         }
 
 
-        public Payment Pay(PayRequest PayRequest, string ApiKey)
+        public Payment CheckPlate(string VehiclePlate, string APIKey)
         {
+
             using (var DBContext = new SmartOnStreetParkingDbContext())
             {
+                return DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey && o.Start<DateTime.UtcNow && o.Start.AddMinutes(o.Duration)> DateTime.UtcNow).FirstOrDefault();
+            }
+
+        }
+
+
+        public List<Payment> GetPayments(string VehiclePlate, string APIKey)
+        {
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                return DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey).ToList();
+            }
+
+        }
+
+        public Payment Pay(PayRequest PayRequest)
+        {
+
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+
+                Member Member = DBContext.Members.Where(u => u.ApiKey == PayRequest.APIkey).FirstOrDefault();
                 var Payment = new Payment()
                 {
-                    APIKey = ApiKey,
-                    MemberId=DBContext.Members.Where(u=>u.ApiKey==ApiKey).DefaultIfEmpty().Select(l=>l.Id).FirstOrDefault(),
+                    APIKey = PayRequest.APIkey,
+                    MemberId= Member.Id,
                     Duration = PayRequest.SpotTickets.Tickets.Select(i => i.Duration).DefaultIfEmpty().Sum(),
                     ParkingSpotId=PayRequest.SpotId,
                     VehiclePlate= PayRequest.VehiclePlate,

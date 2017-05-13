@@ -69,9 +69,11 @@ namespace UnitTests
             PayRequest.SpotTickets.Tickets = new List<Ticket>();
             PayRequest.SpotTickets.Tickets.Add(new Ticket { Price = 12, Duration=60 });
             PayRequest.VehiclePlate = "KPH5144";
+            PayRequest.APIkey= "b82e61fa-8f2c-4fcd-900b-115aed5fe393";
+            
             IAPIRepository _APIRepository = new APIRepository();
 
-            Payment ForMitsos = _APIRepository.Pay(PayRequest, "b82e61fa-8f2c-4fcd-900b-115aed5fe393");
+            Payment ForMitsos = _APIRepository.Pay(PayRequest);
         }
 
         [TestMethod]

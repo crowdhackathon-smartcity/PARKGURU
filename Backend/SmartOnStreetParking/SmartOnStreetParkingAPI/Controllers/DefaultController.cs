@@ -33,7 +33,7 @@ namespace SmartOnStreetParking.API.Controllers
         /// <summary>
         /// Search for parkings spots at requested location and radius
         /// </summary>
-        /// <param name="SearchSpotsRequest">The class that contains requested parameters</param>
+        /// <param name="SearchSpotsRequest">The class that contains the input parameters</param>
         /// <returns>The array of parking spots</returns>
         [ResponseType(typeof(List<ParkingSpotResponse>))]
         [HttpPost]
@@ -44,22 +44,50 @@ namespace SmartOnStreetParking.API.Controllers
         }
 
         /// <summary>
-        /// Search for parkings spots at requested location and radius
+        /// Check if a vehicle plate has a valid active payment
         /// </summary>
-        /// <param name="SearchSpotsRequest">The class that contains requested parameters</param>
-        /// <returns>The array of parking spots</returns>
+        /// <param name="VehiclePlate">The vehicle plate</param>
+        /// <param name="APIKey">The Developer API Key</param>
+        /// <returns>The active payment, null if no active payment exists</returns>
+        [ResponseType(typeof(Payment))]
+        [HttpGet]
+        public IHttpActionResult CheckPlate(string VehiclePlate, string APIKey)
+        {
+
+            return Ok(_APIRepository.CheckPlate(VehiclePlate, APIKey));
+        }
+
+        /// <summary>
+        /// Get parking history of a vehicle plate
+        /// </summary>
+        /// <param name="VehiclePlate">The vehicle plate</param>
+        /// <param name="APIKey">The Developer API Key</param>
+        /// <returns>List of payments class</returns>
+        [ResponseType(typeof(List<Payment>))]
+        [HttpGet]
+        public IHttpActionResult GetPayments(string VehiclePlate,string APIKey)
+        {
+
+            return Ok(_APIRepository.GetPayments( VehiclePlate,  APIKey));
+        }
+
+        /// <summary>
+        /// Vehicle plate payment for a period of time at a specific parking spot
+        /// </summary>
+        /// <param name="PayRequest">The class that contains the input parameters</param>
+        /// <returns>The payment class</returns>
         [ResponseType(typeof(Payment))]
         [HttpPost]
         public IHttpActionResult Pay(PayRequest PayRequest)
         {
 
-            return Ok(_APIRepository.Pay(PayRequest, PayRequest.APIkey));
+            return Ok(_APIRepository.Pay(PayRequest));
         }
 
         /// <summary>
         /// Calculates the price to park at requested parking spot for the requested duration
         /// </summary>
-        /// <param name="CalcTicketsRequest">The class that contains requested parameters</param>
+        /// <param name="CalcTicketsRequest">The class that contains the input parameters</param>
         /// <returns>Parking spot calculated pricing class</returns>
         [ResponseType(typeof(SpotTickets))]
         [HttpPost]

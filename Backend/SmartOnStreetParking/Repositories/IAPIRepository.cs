@@ -16,7 +16,9 @@ namespace SmartOnStreetParking.Repositories
 
         bool UpdateDummyRecordWithSpatial(long SpotId, List<Coordinate> Edges);
 
-        Payment Pay(PayRequest PayRequest, string ApiKey);
+        Payment Pay(PayRequest PayRequest);
+        List<Payment> GetPayments(string VehiclePlate, string APIKey);
+        Payment CheckPlate(string VehiclePlate, string APIKey);
 
     }
 }
