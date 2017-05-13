@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/_TopNavbar.cshtml
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/_Navigation.cshtml
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/_Footer.cshtml
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/_EmptyLayout.cshtml
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/DisplayTemplates/Enum.cshtml
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/DisplayTemplates/decimal.cshtml
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared/DisplayTemplates
+/Backend/SmartOnStreetParking/SmartOnStreetParking.Web/Views/Shared
