@@ -1,4 +1,5 @@
 ﻿using SmartOnStreetParking.Models;
+using SmartOnStreetParking.Models.ViewModels;
 using SmartOnStreetParking.Repositories;
 using SmartOnStreetParking.Web.Utils;
 using System;
@@ -27,8 +28,21 @@ namespace SmartOnStreetParking.Web.Controllers
         {
 
             List<Payment> RetVal = _Repository.GetAll();
-
-            return View(RetVal);
+            List<Payment_ViewModel> Ret = new List<Payment_ViewModel>();
+            foreach (var itm in RetVal)
+            {
+                Payment_ViewModel i = new Payment_ViewModel();
+                i.MemberId = itm.MemberId;
+                i.MemberName = itm.Member.Name;
+                i.MuncipId = itm.ParkingSpot.Zone.Member.Id;
+                i.MuncipName = itm.ParkingSpot.Zone.Member.Name;
+                i.Plate = itm.VehiclePlate;
+                i.Duration = itm.Duration;
+                i.Date = itm.Start;
+                i.Price = itm.Ticket.Price;
+                Ret.Add(i);
+            }
+            return View(Ret);
         }
     }
 }

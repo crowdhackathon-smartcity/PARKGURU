@@ -25,11 +25,11 @@ namespace SmartOnStreetParking.Repositories
             using (var DBContext = new SmartOnStreetParkingDbContext())
             {
                 DBContext.Configuration.ProxyCreationEnabled = false;
-                var zones = DBContext.Zones;
-                if (zones.Count() == 0)
+                var payments = DBContext.Payments;
+                if (payments.Count() == 0)
                     return new List<Payment>();
                 else
-                    return DBContext.Payments.ToList();
+                    return DBContext.Payments.Include("Member").Include("ParkingSpot").Include("ParkingSpot.Zone.Member").ToList();
             }
         }
     }

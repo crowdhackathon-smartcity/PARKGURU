@@ -42,6 +42,7 @@ namespace SmartOnStreetParking.Repositories
             {
 
 
+
                 var ParkingSpots = DBContext.ParkingSpots
                     .Include("Zone")
                     .Include("Zone.Tickets")
