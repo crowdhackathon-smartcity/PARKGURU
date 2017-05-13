@@ -5,8 +5,8 @@ function initMap(coordString, coordType, mapContainer, ModelId, ModelName) {
     geocoder = new google.maps.Geocoder();
     var map = new google.maps.Map(mapContainer,
     {
-        zoom: 2,
-        center: { lat: 16.7639015, lng: 13.2240933 },
+        zoom: 12,
+        center: { lat: 37.9828735, lng: 23.7356535 },
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         streetViewControl: false,
         mapTypeControl: true
