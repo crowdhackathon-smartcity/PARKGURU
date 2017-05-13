@@ -1,5 +1,7 @@
 ﻿using SmartOnStreetParking.Models;
+using SmartOnStreetParking.Repositories.ParkingSpotImport;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -26,4 +28,22 @@ namespace SmartOnStreetParking.Web.Models
             return coordString;
         }
     }
+
+    public class ImportResultViewModel
+    {
+        public Int64 ZoneId { get; set; }
+        public List<ImportedParkingSpot> Items { get; set; }
+    }
+
+    public class StartImportViewModel
+    {
+        public string XmlData { get; set; }
+
+        public Int64 ZoneId { get; set; }
+
+
+    }
+
+
+
 }

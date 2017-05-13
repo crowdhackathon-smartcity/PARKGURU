@@ -3,6 +3,7 @@ using Newtonsoft.Json.Serialization;
 using SmartOnStreetParking.Models;
 using SmartOnStreetParking.Models.Enums;
 using SmartOnStreetParking.Repositories;
+using SmartOnStreetParking.Repositories.ParkingSpotImport;
 using SmartOnStreetParking.Web.Models;
 using SmartOnStreetParking.Web.Utils;
 using System;
@@ -105,6 +106,66 @@ namespace SmartOnStreetParking.Web.Controllers
             //_Repository.Add(ZoneModel);
 
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult StartImport()
+        {
+            StartImportViewModel ViewModel = new StartImportViewModel();
+            
+
+            return View(ViewModel);
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult StartImport(StartImportViewModel ImportInfo)
+        {
+            if (!ModelState.IsValid) { return View(ImportInfo); }
+            ParkingSpotImportHandler Importer = new ParkingSpotImportHandler();
+
+            var ImportResult = Importer.GetParkingSpots(ImportInfo.XmlData, GetMember().Name);
+            
+           
+            foreach (ImportedParkingSpot Spot in ImportResult)
+            {
+                ParkingSpot SpotModel = new ParkingSpot
+                {
+                    Address = Spot.StreetAddress,
+                    Capacity = Spot.Capacity,
+                    CurrentAvailabilityState = AvailabilityState.Unknown,
+                    DateCreated = DateTime.UtcNow,
+                    Deleted = false,
+                    ReferenceId= Spot.ReferenceId,
+                    GeometryType = GeometryType.Line,
+                    
+                    
+                  
+                    Visible = true,
+                    ZoneId = ImportInfo.ZoneId
+                };
+                _Repository.Add(SpotModel, Spot.Edges);
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Import()
+        {   
+            string TempData = "<ArrayOfParkingSpot><ParkingSpot> <RefID>18874</RefID><Street>ΠΑΤΗΣΙΩΝ</Street><From><Number>36</Number><Coord><lat>0</lat><lng>0</lng></Coord></From><To><Number>40</Number><Coord>0</Coord></To><capacity>0</capacity></ParkingSpot><ParkingSpot><RefID>18942</RefID><Street>ΜΠΟΤΑΣΗ</Street><From><Number>1</Number></From><To><Number>7</Number></To><capacity>0</capacity></ParkingSpot></ArrayOfParkingSpot>";
+
+
+            ParkingSpotImportHandler Importer = new ParkingSpotImportHandler();
+
+            var ImportResult = Importer.GetParkingSpots(TempData, "sss");
+
+            ImportResultViewModel ViewModel = new ImportResultViewModel();
+
+            ViewModel.Items = ImportResult;
+            return View(ViewModel);
         }
 
 
