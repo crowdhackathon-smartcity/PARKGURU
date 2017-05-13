@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SmartOnStreetParking.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,11 +24,14 @@ namespace SmartOnStreetParking.Models
         public long Id { get; set; }
 
      
-        [Column("Pay_SpotId")]
-        public long SpotId { get; set; }
+        [Column("Pay_ParkingSpotId")]
+        public long ParkingSpotId { get; set; }
 
-        [Column("Pay_DevId")]
-        public long DevId { get; set; }
+        [Column("Pay_MemberId")]
+        public long MemberId { get; set; }
+
+        [Column("Pay_APIKey")]
+        public string APIKey { get; set; }
 
         [Column("Pay_VehiclePlate")]
         public string VehiclePlate { get; set; }
@@ -43,11 +47,11 @@ namespace SmartOnStreetParking.Models
         public string TicketAsJson { get; set; }
 
         [NotMapped]
-        public Ticket Ticket
+        public SpotTickets Ticket
         {
             get
             {
-                return TicketAsJson == null ? null : JsonConvert.DeserializeObject<Ticket>(TicketAsJson);
+                return TicketAsJson == null ? null : JsonConvert.DeserializeObject<SpotTickets>(TicketAsJson);
             }
             set
             {
@@ -63,8 +67,6 @@ namespace SmartOnStreetParking.Models
             }
         }
 
-        [NotMapped]
-        public List<Ticket> Tickets { get; set; }
 
         [JsonIgnore]
         public virtual Member Member { get; set; }

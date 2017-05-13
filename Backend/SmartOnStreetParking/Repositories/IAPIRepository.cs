@@ -12,9 +12,11 @@ namespace SmartOnStreetParking.Repositories
     {
         List<ParkingSpotResponse> SearchSpots(SearchSpotsRequest SearchSpotsRequest);
 
-        SpotTicketsResponse CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest);
+        SpotTickets CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest);
 
         bool UpdateDummyRecordWithSpatial(long SpotId, List<Coordinate> Edges);
+
+        Payment Pay(PayRequest PayRequest, string ApiKey);
 
     }
 }

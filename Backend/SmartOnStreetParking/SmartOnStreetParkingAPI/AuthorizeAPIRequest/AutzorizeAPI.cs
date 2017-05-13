@@ -1,93 +1,115 @@
-﻿using SmartOnStreetParking.Repositories;
+﻿using SmartOnStreetParking.Models;
+using SmartOnStreetParking.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Authentication;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
+using System.Web.Http.Controllers;
 
 namespace SmartOnStreetParking.API.AuthorizeAPIRequest
 {
 
 
 
-
-
-    public class BasicAuthenticationAttribute : System.Web.Http.Filters.ActionFilterAttribute
-
+    public class MyAuthorizationFilter : AuthorizeAttribute
     {
-
-
-        private Dictionary<string, string> ParseRequestHeaders(System.Web.Http.Controllers.HttpActionContext actionContext)
-
+        protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            
-            Dictionary<string, string> credentials = new Dictionary<string, string>();
+            var identity = Thread.CurrentPrincipal.Identity;
+            if (identity == null && HttpContext.Current != null)
+                identity = HttpContext.Current.User.Identity;
 
-            var httpRequestHeader = actionContext.Request.Headers.GetValues("Authorization").FirstOrDefault();
+            if (identity != null && identity.IsAuthenticated)
+            {
+                var basicAuth = identity as BasicAuthenticationIdentity;
 
-            httpRequestHeader = Encoding.UTF8.GetString(Convert.FromBase64String(httpRequestHeader.Substring("Basic".Length)));
+                // do your business validation as needed
+                IAPIAuth AuthRepo = new APIAuth();
+                if (AuthRepo.ValidateAPIRequest(basicAuth.Name, basicAuth.Password) > 0)
+                    return true;
+            }
 
-            string[] httpRequestHeaderValues = httpRequestHeader.Split(':');
+            return false;
+        }
+    }
 
-            string APIKey = httpRequestHeaderValues[0];
 
-            string APISecret = httpRequestHeaderValues[1];
+        public class BasicAuthenticationHandler : DelegatingHandler
+    {
+        private const string WWWAuthenticateHeader = "WWW-Authenticate";
 
-            credentials.Add("APIKey", APIKey);
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                                                               CancellationToken cancellationToken)
+        {
+            var credentials = ParseAuthorizationHeader(request);
 
-            credentials.Add("APISecret", APISecret);
+            if (credentials != null)
+            {
+                var identity = new BasicAuthenticationIdentity(credentials.Name, credentials.Password);
+                var principal = new GenericPrincipal(identity, null);
 
-            return credentials;
+                Thread.CurrentPrincipal = principal;
+                //if (HttpContext.Current != null)
+                //    HttpContext.Current.User = principal;
+            }
 
+            return base.SendAsync(request, cancellationToken)
+                .ContinueWith(task =>
+                {
+                    var response = task.Result;
+                    if (credentials == null && response.StatusCode == HttpStatusCode.Unauthorized)
+                        Challenge(request, response);
+
+
+                    return response;
+                });
         }
 
-        public override void OnActionExecuting(System.Web.Http.Controllers.HttpActionContext actionContext)
-
+        /// <summary>
+        /// Parses the Authorization header and creates user credentials
+        /// </summary>
+        /// <param name="actionContext"></param>
+        protected virtual BasicAuthenticationIdentity ParseAuthorizationHeader(HttpRequestMessage request)
         {
+            string authHeader = null;
+            var auth = request.Headers.Authorization;
+            if (auth != null && auth.Scheme == "Basic")
+                authHeader = auth.Parameter;
 
-            try
+            if (string.IsNullOrEmpty(authHeader))
+                return null;
 
-            {
+            authHeader = Encoding.Default.GetString(Convert.FromBase64String(authHeader));
 
-                if (actionContext.Request.Headers.Authorization == null)
+            var tokens = authHeader.Split(':');
+            if (tokens.Length < 2)
+                return null;
 
-                {
+            return new BasicAuthenticationIdentity(tokens[0], tokens[1]);
+        }
 
-                    actionContext.Response = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
 
-                }
-
-                else
-
-                {
-
-                    Dictionary<string, string> credentials = ParseRequestHeaders(actionContext);
-                    IAPIAuth AuthRepo = new APIAuth();
-                    if (AuthRepo.ValidateAPIRequest(credentials["APIKey"], credentials["APISecret"]))
-
-                        actionContext.Response = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.OK);
-
-                    else
-
-                        actionContext.Response = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
-
-                }
-
-            }
-
-            catch
-
-            {
-
-                actionContext.Response = new System.Net.Http.HttpResponseMessage
-
-(System.Net.HttpStatusCode.InternalServerError);
-
-            }
-
+        /// <summary>
+        /// Send the Authentication Challenge request
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="actionContext"></param>
+        void Challenge(HttpRequestMessage request, HttpResponseMessage response)
+        {
+            var host = request.RequestUri.DnsSafeHost;
+            response.Headers.Add(WWWAuthenticateHeader, string.Format("Basic realm=\"{0}\"", host));
         }
 
     }
 
 }
+
+ 

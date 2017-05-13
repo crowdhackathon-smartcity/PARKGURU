@@ -52,7 +52,7 @@ namespace SmartOnStreetParking.Models.ViewModels
 
         public double LocationDistance { get; set; }
 
-        public SpotTicketsResponse Tickets { get; set; }
+        public SpotTickets Tickets { get; set; }
 
 
     }

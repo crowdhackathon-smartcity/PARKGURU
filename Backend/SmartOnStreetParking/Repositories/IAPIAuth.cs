@@ -9,6 +9,6 @@ namespace SmartOnStreetParking.Repositories
     public interface IAPIAuth
     {
 
-        bool ValidateAPIRequest(string Key, string Secret);
+        long ValidateAPIRequest(string Key, string Secret);
     }
 }
