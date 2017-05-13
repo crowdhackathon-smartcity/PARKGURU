@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import io.realm.RealmResults;
 import project.smartcity.com.smartcityapp.R;
 import project.smartcity.com.smartcityapp.models.Booking;
@@ -19,10 +21,10 @@ public class BookingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private LayoutInflater mInflater;
     private Context mContext;
-    private RealmResults<Booking> mResults;
+    private ArrayList<Booking> mResults;
 
 
-    public BookingsAdapter(Context context, RealmResults<Booking> results) {
+    public BookingsAdapter(Context context, ArrayList<Booking> results) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
         setResults(results);
@@ -38,9 +40,7 @@ public class BookingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final Booking booking = mResults.get(position);
-        if (booking.isValid()) {
-            // ((BookingItem) holder).zoneName.setText(booking.getName);
-        }
+
 
 
     }
@@ -50,7 +50,7 @@ public class BookingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mResults.size();
     }
 
-    public void setResults(RealmResults<Booking> results) {
+    public void setResults(ArrayList<Booking> results) {
         mResults = results;
         notifyDataSetChanged();
     }
@@ -65,7 +65,6 @@ public class BookingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             address = (TextView) view.findViewById(R.id.address);
             timeParked = (TextView) view.findViewById(R.id.time_parked);
             amountPayed = (TextView) view.findViewById(R.id.amount_pay);
-
 
         }
 

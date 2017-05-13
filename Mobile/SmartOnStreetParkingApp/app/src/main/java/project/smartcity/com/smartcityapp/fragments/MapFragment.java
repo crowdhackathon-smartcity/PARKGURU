@@ -252,6 +252,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
 
     public void fixLocation(Location location) {
+        //custom fix location demo
+//        Latitude:37.9828735
+//        Longitude:23.7356535
         if (mMap != null && location != null) {
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);//default zoom
