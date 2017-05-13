@@ -48,7 +48,7 @@ namespace SmartOnStreetParking.API.Controllers
         /// </summary>
         /// <param name="VehiclePlate">The vehicle plate</param>
         /// <param name="APIKey">The Developer API Key</param>
-        /// <returns>The active payment, null if no active payment exists</returns>
+        /// <returns>The active payment, null if no active payments exists</returns>
         [ResponseType(typeof(Payment))]
         [HttpGet]
         public IHttpActionResult CheckPlate(string VehiclePlate, string APIKey)

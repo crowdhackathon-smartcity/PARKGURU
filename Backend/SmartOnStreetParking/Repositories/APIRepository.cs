@@ -110,7 +110,10 @@ namespace SmartOnStreetParking.Repositories
             
             while (Duration>0)
             {
-                var BestTicket = Zone.Tickets.Where(u => u.Duration <= Duration).OrderByDescending(i => i.Duration).FirstOrDefault();
+                var BestTicket = Zone.Tickets.Where(u => u.Duration > Duration).OrderBy(i => i.Duration).FirstOrDefault();
+                if (BestTicket == null)
+                    BestTicket = Zone.Tickets.Where(u => u.Duration <= Duration).OrderByDescending(i => i.Duration).FirstOrDefault();
+
                 if (BestTicket == null)
                     break;
                 Ret.Tickets.Add(new Ticket {Duration=BestTicket.Duration, Price=BestTicket.Price, SN=BestTicket.SN });
@@ -127,7 +130,10 @@ namespace SmartOnStreetParking.Repositories
 
             using (var DBContext = new SmartOnStreetParkingDbContext())
             {
-                return DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey && o.Start<DateTime.UtcNow && o.Start.AddMinutes(o.Duration)> DateTime.UtcNow).FirstOrDefault();
+                var Payments = DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey && o.Start <= DateTime.UtcNow).ToList();
+
+
+                return Payments.Where(o => o.Start>= DateTime.UtcNow.AddMinutes(-o.Duration)).FirstOrDefault();
             }
 
         }
