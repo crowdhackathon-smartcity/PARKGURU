@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CalcTicketsRequest.cs" />
     <Compile Include="ViewModels\ParkingSpotVM.cs" />
+    <Compile Include="ViewModels\Payment_ViewModel.cs" />
     <Compile Include="ViewModels\PayRequest.cs" />
     <Compile Include="ViewModels\SearchSpotsRequest.cs" />
     <Compile Include="ViewModels\SpotTickets.cs" />

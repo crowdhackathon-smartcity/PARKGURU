@@ -139,9 +139,10 @@ namespace SmartOnStreetParking.Web.Controllers
                     Deleted = false,
                     ReferenceId= Spot.ReferenceId,
                     GeometryType = GeometryType.Line,
-                    
-                    
-                  
+                    Name= Spot.StreetAddress,
+
+
+
                     Visible = true,
                     ZoneId = ImportInfo.ZoneId
                 };

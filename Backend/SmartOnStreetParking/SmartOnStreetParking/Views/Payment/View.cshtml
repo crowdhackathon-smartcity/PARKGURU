@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SmartOnStreetParking.Models.ViewModels.Payment_ViewModel>
+@using SmartOnStreetParking.Models;
+@using SmartOnStreetParking.Web.Utils
+@using SmartOnStreetParking.Web.Extensions
+
+@{
+    ViewBag.Title = "Payments";
+    Member SelectedMember = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        SelectedMember = ApplicationCache.GetMember(Convert.ToInt64(User.Identity.GetProperty("Member_Id")));
+    }
+}
+
+
+<h2>View</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MuncipName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if ((SelectedMember.Type == SmartOnStreetParking.Models.Enums.MemberType.Developer && item.MemberId == SelectedMember.Id) || (SelectedMember.Type == SmartOnStreetParking.Models.Enums.MemberType.Provider && item.MuncipId == SelectedMember.Id))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MuncipName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration) (minutes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            € @Html.DisplayFor(modelItem => item.Price)
+        </td>
+    </tr>
+    }
+}
+
+</table>
