@@ -10,6 +10,7 @@ namespace SmartOnStreetParking.Models.ViewModels
     {
 
         public long SpotId { get; set; }
-        public SpotTicketsResponse SpotTicket { get; set; }
+        public SpotTickets SpotTickets { get; set; }
+        public string VehiclePlate { get; set; }
     }
 }

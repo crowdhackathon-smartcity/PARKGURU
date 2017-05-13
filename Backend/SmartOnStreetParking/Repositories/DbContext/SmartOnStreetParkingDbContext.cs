@@ -32,6 +32,5 @@ namespace SmartOnStreetParking
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Payment> Payments { get; set; }
-
     }
 }

@@ -101,9 +101,9 @@ namespace SmartOnStreetParking.Repositories
         }
 
 
-        private SpotTicketsResponse CalcSpotTickets(Zone Zone, int Duration,string VehiclePlate)
+        private SpotTickets CalcSpotTickets(Zone Zone, int Duration,string VehiclePlate)
         {
-            SpotTicketsResponse Ret = new SpotTicketsResponse();
+            SpotTickets Ret = new SpotTickets();
             Ret.Tickets = new List<Ticket>();
             if (Zone.ParkingMaxDuration < Duration)
                 return Ret;
@@ -122,21 +122,31 @@ namespace SmartOnStreetParking.Repositories
         }
 
 
-        public Payment Pay(PayRequest PayRequest)
+        public Payment Pay(PayRequest PayRequest, string ApiKey)
         {
-            //using (var DBContext = new SmartOnStreetParkingDbContext())
-            //{
-            //    Payment Payment = new Payment()
-            //    {
-            //        DevId
-            //    }
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                var Payment = new Payment()
+                {
+                    APIKey = ApiKey,
+                    MemberId=DBContext.Members.Where(u=>u.ApiKey==ApiKey).DefaultIfEmpty().Select(l=>l.Id).FirstOrDefault(),
+                    Duration = PayRequest.SpotTickets.Tickets.Select(i => i.Duration).DefaultIfEmpty().Sum(),
+                    ParkingSpotId=PayRequest.SpotId,
+                    VehiclePlate= PayRequest.VehiclePlate,
+                    Ticket= PayRequest.SpotTickets,
+                    Start=DateTime.UtcNow
 
+                    
+                };
 
-            //}
-            return null;
+                DBContext.Payments.Add(Payment);
+                DBContext.SaveChanges();
+                return Payment;
+            }
+            
         }
 
-        public SpotTicketsResponse CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest)
+        public SpotTickets CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest)
         {
 
             using (var DBContext = new SmartOnStreetParkingDbContext())

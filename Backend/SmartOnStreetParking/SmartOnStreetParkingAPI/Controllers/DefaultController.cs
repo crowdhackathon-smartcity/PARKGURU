@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace SmartOnStreetParking.API.Controllers
 {
-    //[BasicAuthentication]
+    [MyAuthorizationFilter]
     public class DefaultController : ApiController
     {
 
@@ -29,8 +29,6 @@ namespace SmartOnStreetParking.API.Controllers
         }
 
 
-
-
         /// <summary>
         /// Search for parkings spots at requested location and radius
         /// </summary>
@@ -45,11 +43,24 @@ namespace SmartOnStreetParking.API.Controllers
         }
 
         /// <summary>
+        /// Search for parkings spots at requested location and radius
+        /// </summary>
+        /// <param name="SearchSpotsRequest">The class that contains requested parameters</param>
+        /// <returns>The array of parking spots</returns>
+        [ResponseType(typeof(List<ParkingSpotResponse>))]
+        [HttpPost]
+        public IHttpActionResult Pay(PayRequest PayRequest)
+        {
+
+            return Ok(_APIRepository.Pay(PayRequest, RequestContext.Principal.Identity.Name));
+        }
+
+        /// <summary>
         /// Calculates the price to park at requested parking spot for the requested duration
         /// </summary>
         /// <param name="CalcTicketsRequest">The class that contains requested parameters</param>
         /// <returns>Parking spot calculated pricing class</returns>
-        [ResponseType(typeof(SpotTicketsResponse))]
+        [ResponseType(typeof(SpotTickets))]
         [HttpPost]
         public IHttpActionResult CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest)
         {

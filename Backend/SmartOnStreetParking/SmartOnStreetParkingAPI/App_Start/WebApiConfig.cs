@@ -16,7 +16,7 @@ namespace SmartOnStreetParkingAPI
             // Web API configuration and services
 
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new BasicAuthenticationHandler());
             //config.Filters.Add(new BasicAuthenticationAttribute());
 
             // Web API routes
