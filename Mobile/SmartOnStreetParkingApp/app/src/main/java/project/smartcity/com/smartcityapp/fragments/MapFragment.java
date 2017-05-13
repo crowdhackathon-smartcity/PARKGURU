@@ -69,7 +69,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public MapFragment() {
     }
 
-    private static int DistanceInMeters = 1000;
+    private static int DistanceInMeters = 5000;
     private static int DurationInMinutes = 60;
 
     Button search;
@@ -94,7 +94,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         parkHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (selectedParkingSpot !=null) {
+                if (selectedParkingSpot != null) {
                     Gson gson = new Gson();
                     String selectedParkingSpotPassData = gson.toJson(selectedParkingSpot);
                     Intent i = new Intent(getActivity(), BookTicketActivity.class);
@@ -196,7 +196,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         polygonParkingSpotHashMap = new HashMap<>();
         addressProvider = new AddressProvider(getActivity());
 
-        onStreetColor = Integer.toHexString(ContextCompat.getColor(getContext(), R.color.blue_light));
+        onStreetColor = "#" + Integer.toHexString(ContextCompat.getColor(getContext(), R.color.blue_light)).trim();
 
 
     }
@@ -265,7 +265,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             ArrayList<GeometryEdge> edges = new ArrayList<>(parkingSpot.getGeometryEdges());
             //set marker to the first edge of the spot
             LatLng latLng = new LatLng(edges.get(0).getLatitude(), edges.get(0).getLongitude());
-            Marker marker = mMap.addMarker(new MarkerOptions().position(latLng));
+            Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).icon(icon));
             markerParkingSpotHashMap.put(marker, parkingSpot);
 
             int parkingType = parkingSpot.getGeometryType();

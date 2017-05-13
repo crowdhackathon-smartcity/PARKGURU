@@ -10,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Picasso;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.VerificationError;
 
@@ -31,7 +33,8 @@ public class ZoneInfoFragment extends Fragment implements Step {
 
     private DataManager dataManager;
     AddressProvider addressProvider;
-    TextView addressInput;
+    TextView addressInput, zoneName, zoneInfo;
+    ImageView zoneImage;
 
 
     @Override
@@ -44,6 +47,9 @@ public class ZoneInfoFragment extends Fragment implements Step {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.step_first_fr_info, container, false);
         addressInput = (TextView) view.findViewById(R.id.address_input);
+        zoneName = (TextView) view.findViewById(R.id.zone_name);
+        zoneInfo = (TextView) view.findViewById(R.id.zone_info);
+        zoneImage = (ImageView) view.findViewById(R.id.zone_image);
         return view;
     }
 
@@ -57,7 +63,12 @@ public class ZoneInfoFragment extends Fragment implements Step {
     public void onSelected() {
         //update UI when selected
         ParkingSpot data = dataManager.getParkingSpot();
-
+        zoneName.setText(data.getZoneName());
+        zoneInfo.setText(data.getZoneInfo());
+        String logo = data.getProviderLogo();
+        if (logo != null) {
+            Picasso.with(getActivity()).load(logo).fit().centerCrop().error(R.drawable.sos_parking).into(zoneImage);
+        }
         //load address in another thread (this should be done on an background thread)
         //but Geocoder doesn't take too much to respond so we are ok for now.
         Thread thread = new Thread(new Runnable() {
