@@ -4,11 +4,11 @@ namespace SmartOnStreetParking.Models.Enums
 {
     public enum ParkingSpotStatus : int
     {
-        [Display(Name = "Hidden")]
+        [Display(Name = "Hidden", ResourceType = typeof(Resources.Resources))]
         Hidden = 0,
-        [Display(Name = "Visible")]
+        [Display(Name = "Visible", ResourceType = typeof(Resources.Resources))]
         Visible = 1,
-        [Display(Name = "Bookable")]
+        [Display(Name = "Bookable", ResourceType = typeof(Resources.Resources))]
         Bookable = 2
     };
 }

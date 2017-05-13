@@ -23,6 +23,12 @@ namespace SmartOnStreetParking.Models
         [Column("Member_Name")]
         public string Name { get; set; }
 
+        [Column("Member_Info")]
+        public string Info { get; set; }
+
+        [Column("Member_Logo")]
+        public string Logo { get; set; }
+
         [Column("Member_Address")]
         public string Address { get; set; }
 

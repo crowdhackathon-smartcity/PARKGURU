@@ -22,6 +22,8 @@ namespace SmartOnStreetParking.Models.ViewModels
 
         public bool ZoneIsPaying { get; set; }
 
+        public string ZoneColor { get; set; }
+
         public List<ParkingTimeTable> ParkingTimeTable { get; set; }
 
         public int ParkingMaxDuration { get; set; }
