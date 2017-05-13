@@ -121,6 +121,21 @@ namespace SmartOnStreetParking.Repositories
             return Ret;
         }
 
+
+        public Payment Pay(PayRequest PayRequest)
+        {
+            //using (var DBContext = new SmartOnStreetParkingDbContext())
+            //{
+            //    Payment Payment = new Payment()
+            //    {
+            //        DevId
+            //    }
+
+
+            //}
+            return null;
+        }
+
         public SpotTicketsResponse CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest)
         {
 
