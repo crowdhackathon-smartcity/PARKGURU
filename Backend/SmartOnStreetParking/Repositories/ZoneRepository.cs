@@ -32,10 +32,6 @@ namespace SmartOnStreetParking.Repositories
             return ZoneInfo;
         }
 
-        /// <summary>
-        /// Edit an existing zone.
-        /// </summary>
-        /// <param name="ZoneInfo">The details of the zone to edit.</param>
         public void Edit(Zone ZoneInfo)
         {
             int ZoneToEdit = 0;
@@ -54,10 +50,6 @@ namespace SmartOnStreetParking.Repositories
             }
         }
 
-        /// <summary>
-        /// Delete an existing zone.
-        /// </summary>
-        /// <param name="Id">The id of the zone to delete.</param>
         public void Delete(long Id)
         {
             Zone ZoneToDelete = null;
@@ -75,9 +67,7 @@ namespace SmartOnStreetParking.Repositories
                 }
             }
         }
-        /// <summary>
-        /// Get all zones
-        /// </summary>
+        
         public List<Zone> GetAll()
         {
 
@@ -92,26 +82,17 @@ namespace SmartOnStreetParking.Repositories
             }
         }
 
-        /// <summary>
-        /// Get a specific zone from the database.
-        /// </summary>
-        /// <param name="Id">The Id of the zone to find.</param>
-        /// <returns>If Successfull value wil return the zone object, else null.</returns>
-        //public Zone_ViewModel GetById(long Id, string Lang)
-        //{
-        //    Zone_ViewModel ret = null;
-        //    using (var DBContext = new SmartOnStreetParkingDbContext())
-        //    {
+        public Zone GetById(long Id)
+        {
+            Zone RetVal = null;
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
 
-        //        var Result = DBContext.Zones.Where(u => u.Id == Id).Include(pr => pr.PricingCatalogs).FirstOrDefault();
-        //        if (Result == null)
-        //        {
-        //            throw Utils.GenerateHttpResponse(HttpStatusCode.NotFound, string.Format("Zone with id: {0} not found", Id), "Zone not found");
-        //        }
-        //        ret = new Zone_ViewModel() { Color = Result.Color, Currency = Result.PricingCatalogs.FirstOrDefault().Currency, Description = Result.Description.ToLocaleString(Lang), Id = Result.Id, IsParkingAllowed = Result.IsParkingAllowed, IsPaying = Result.IsPaying, Municipality = Result.Ventor.Id, MunicipalityParkingText = Result.Ventor.Name.ToLocaleString(Lang), MunicipalityUrl = Result.Ventor.Logo, Name = Result.Name.ToLocaleString(Lang), TimeLimit = Result.TimeLimit, TransactionFee = Result.TransactionFee, Vat = Result.PricingCatalogs.FirstOrDefault().Vat };
-        //    }
-        //    return ret;
-        //}
+                RetVal = DBContext.Zones.Where(u => u.Id == Id).FirstOrDefault();
+                
+            }
+            return RetVal;
+        }
         /// <summary>
         /// Get a specific zone from the database.
         /// </summary>
@@ -131,7 +112,7 @@ namespace SmartOnStreetParking.Repositories
         //    }
         //    return ret;
         //}
-        
+
 
         #endregion
     }

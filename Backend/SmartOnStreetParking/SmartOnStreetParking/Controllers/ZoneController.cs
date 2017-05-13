@@ -2,6 +2,7 @@
 using SmartOnStreetParking.Repositories;
 using SmartOnStreetParking.Web.Models;
 using SmartOnStreetParking.Web.Utils;
+using SmartOnStreetParking.Web.Utils.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace SmartOnStreetParking.Web.Controllers
 {
+    [Authorize]
     public class ZoneController : BaseController
     {
         private readonly IZoneRepository _Repository;
@@ -29,7 +31,7 @@ namespace SmartOnStreetParking.Web.Controllers
         {
 
             List<Zone> RetVal = _Repository.GetAll();
-            
+
             return View(RetVal);
         }
 
@@ -44,11 +46,6 @@ namespace SmartOnStreetParking.Web.Controllers
             return View(ViewModel);
         }
 
-        /// <summary>
-        /// Add a new bank account to the database.
-        /// </summary>
-        /// <param name="AccountInfo">The details of the new account.</param>
-        /// <returns>ActionResult</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddZoneViewModel ZoneInfo)
@@ -65,32 +62,76 @@ namespace SmartOnStreetParking.Web.Controllers
                 ParkingMaxDuration = ZoneInfo.ParkingMaxDuration,
                 Info = ZoneInfo.Info,
                 Visible = true,
-                DateCreated=DateTime.UtcNow,                
+                DateCreated = DateTime.UtcNow,
                 ParkingTimeTable = ZoneInfo.CreateTimeTable()
             };
 
             _Repository.Add(ZoneModel);
 
             return RedirectToAction("Index");
-        //    var config = new MapperConfiguration(cfg => cfg.CreateMap<AccountSettings_ViewModel, AccountSettings>());
-        //    var mapper = config.CreateMapper();
-        //    AccountSettings NewAccount = mapper.Map<AccountSettings_ViewModel, AccountSettings>(AccountInfo);
-
-            //    _Repository.Add(NewAccount);
-
-            //    if (AccountInfo.Type == BankingAccountType.Bank)
-            //    {
-
-            //        return RedirectToAction(BankingControllerIndex.BankIndex);
-            //    }
-            //    else
-            //    {
-            //        return RedirectToAction(BankingControllerIndex.PaypalIndex);
-            //    }
         }
 
+        public ActionResult Edit(int Id)
+        {
+            //throw new NotFoundException("Edit Zone", Id);
+
+            Zone ZoneInfo = _Repository.GetById(Id);
+
+            if (ZoneInfo == null)
+            {
+                throw new NotFoundException("Edit Zone", Id);
+            }
+
+
+            AddZoneViewModel ViewModel = new AddZoneViewModel()
+            {
+                Color = ZoneInfo.Color,
+                Deleted = false,
+                IsPayingZone = ZoneInfo.IsPayingZone,
+                MemberId = ZoneInfo.MemberId,
+                Name = ZoneInfo.Name,
+                ParkingMaxDuration = ZoneInfo.ParkingMaxDuration,
+                Info = ZoneInfo.Info,
+                Visible = true,
+                DateCreated = DateTime.UtcNow,
+                TimeTableAsJson = ZoneInfo.TimeTableAsJson,
+          
+            };
+            ViewModel.LoadTimeTable();
+            return View(ViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(AddZoneViewModel ZoneInfo)
+        {
+            if (!ModelState.IsValid) { return View(ZoneInfo); }
+
+            Zone ZoneModel = new Zone()
+            {
+                Id=ZoneInfo.Id,
+                Color = ZoneInfo.Color,
+                Deleted = false,
+                IsPayingZone = ZoneInfo.IsPayingZone,
+                MemberId = ZoneInfo.MemberId,
+                Name = ZoneInfo.Name,
+                ParkingMaxDuration = ZoneInfo.ParkingMaxDuration,
+                Info = ZoneInfo.Info,
+                Visible = ZoneInfo.Visible,
+                DateCreated = DateTime.UtcNow,
+                ParkingTimeTable = ZoneInfo.CreateTimeTable()
+            };
+
+            _Repository.Edit(ZoneModel);
+
+            return RedirectToAction("Index");
+        }
     }
 
+
+
+
+   
     
 
 }

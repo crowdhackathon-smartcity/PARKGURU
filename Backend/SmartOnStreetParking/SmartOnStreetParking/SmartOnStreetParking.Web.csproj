@@ -300,6 +300,7 @@
     <Content Include="Views\Zone\Index_old.cshtml" />
     <Content Include="Views\Zone\Index.cshtml" />
     <Content Include="Views\Zone\Add.cshtml" />
+    <Content Include="Views\Zone\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
