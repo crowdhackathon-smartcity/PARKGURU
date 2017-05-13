@@ -30,6 +30,24 @@
         android:layout_height="wrap_content"
         android:text="Plate Scan"/>
 
+    <TextView
+        android:layout_margin="10dp"
+        android:text="Manually Add Plate Scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_plates"
+        android:layout_margin="10dp"
+        android:hint="Plate number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submit_plates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Plates"/>
+
 
 
 </LinearLayout>

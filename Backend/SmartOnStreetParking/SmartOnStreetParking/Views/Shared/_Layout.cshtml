@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using SmartOnStreetParking.Models
+@using SmartOnStreetParking.Web.Utils
+@using SmartOnStreetParking.Web.Extensions
+
+@{ 
+    Member SelectedMember = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        SelectedMember = ApplicationCache.GetMember(Convert.ToInt64(User.Identity.GetProperty("Member_Id")));
+    }
+}
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,8 +37,14 @@
     <div class="container body">
         <div class="main_container">
             <!-- Navigation -->
-            @Html.Partial("_Navigation")
-
+            @if (User.Identity.IsAuthenticated && SelectedMember.Type == SmartOnStreetParking.Models.Enums.MemberType.Provider)
+            {
+                @Html.Partial("_Navigation")
+            }
+            else if (User.Identity.IsAuthenticated && SelectedMember.Type == SmartOnStreetParking.Models.Enums.MemberType.Developer)
+            {
+                @Html.Partial("_Navigation_Dev")
+            }
             <!-- Top Navbar -->
             @Html.Partial("_TopNavbar")
 

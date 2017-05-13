@@ -66,6 +66,7 @@
     <Compile Include="ParkingSpotImport\ParkingSpotImportHandler.cs" />
     <Compile Include="ParkingSpotImport\ParkingSpotImportHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZoneRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

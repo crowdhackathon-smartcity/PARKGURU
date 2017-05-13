@@ -17,6 +17,10 @@ public class CalculateTicketsRequest {
     @Expose
     private Integer duration;
 
+    @SerializedName("VehiclePlate")
+    @Expose
+    private String vehiclePlates;
+
 
     public Integer getSpotId() {
         return spotId;
@@ -32,5 +36,14 @@ public class CalculateTicketsRequest {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+
+    public String getVehiclePlates() {
+        return vehiclePlates;
+    }
+
+    public void setVehiclePlates(String vehiclePlates) {
+        this.vehiclePlates = vehiclePlates;
     }
 }
