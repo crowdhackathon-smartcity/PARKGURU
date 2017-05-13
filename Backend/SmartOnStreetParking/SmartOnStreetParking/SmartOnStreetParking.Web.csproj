@@ -199,6 +199,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddZoneViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Pages\NotFound.cshtml" />
     <Content Include="Views\Zone\Index_old.cshtml" />
     <Content Include="Views\Zone\Index.cshtml" />
+    <Content Include="Views\Zone\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
