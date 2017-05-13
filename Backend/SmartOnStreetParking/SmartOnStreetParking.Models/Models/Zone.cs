@@ -67,18 +67,18 @@ namespace SmartOnStreetParking.Models
         [JsonIgnore]
         public string TimeTableAsJson
         {
-            get;set;
+            get; set;
         }
 
-/// <summary>
-/// The Discount By Availability State. Takes effect when DiscountType==ByAvailabilityState
-/// </summary>  
-[NotMapped]
+        /// <summary>
+        /// The Discount By Availability State. Takes effect when DiscountType==ByAvailabilityState
+        /// </summary>  
+        [NotMapped]
         public List<ParkingTimeTable> ParkingTimeTable
         {
             get
             {
-                return TimeTableAsJson == null? new List<ParkingTimeTable>() :  JsonConvert.DeserializeObject<List<ParkingTimeTable>>(TimeTableAsJson);
+                return TimeTableAsJson == null ? new List<ParkingTimeTable>() : JsonConvert.DeserializeObject<List<ParkingTimeTable>>(TimeTableAsJson);
             }
             set
             {
@@ -138,7 +138,7 @@ namespace SmartOnStreetParking.Models
         public virtual ICollection<ParkingSpot> ParkingSpots { get; set; }
 
         [JsonIgnore]
-        public virtual Member Member{ get; set; }
+        public virtual Member Member { get; set; }
 
 
         [JsonIgnore]

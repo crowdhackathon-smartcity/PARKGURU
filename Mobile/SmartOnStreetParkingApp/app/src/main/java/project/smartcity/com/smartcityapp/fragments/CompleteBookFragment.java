@@ -22,6 +22,7 @@ import java.util.Locale;
 import io.realm.Realm;
 import project.smartcity.com.smartcityapp.R;
 import project.smartcity.com.smartcityapp.adapters.DataManager;
+import project.smartcity.com.smartcityapp.models.ParkingSpot;
 import project.smartcity.com.smartcityapp.models.Plates;
 import project.smartcity.com.smartcityapp.models.UserTicket;
 
@@ -33,14 +34,14 @@ public class CompleteBookFragment extends Fragment implements BlockingStep {
 
     private DataManager dataManager;
     TextView parkingTime, amountToPay;
-    EditText plateNumber;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.step_third_fr_complete, container, false);
         parkingTime = (TextView) view.findViewById(R.id.time_parking);
         amountToPay = (TextView) view.findViewById(R.id.amount_pay);
-        plateNumber = (EditText) view.findViewById(R.id.plates);
+
 
         return view;
     }
@@ -64,20 +65,6 @@ public class CompleteBookFragment extends Fragment implements BlockingStep {
     @Override
     @UiThread
     public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback) {
-        String plateNumberTxt = plateNumber.getText().toString();
-        if (TextUtils.isEmpty(plateNumberTxt)) {
-            plateNumber.setError("Empty Plates");
-        } else {
-            //continue
-            callback.getStepperLayout().showProgress("Complete Book  please wait...");
-            Realm realm = Realm.getDefaultInstance();
-            realm.beginTransaction();
-            Plates plates = new Plates();
-            plates.setPlates(plateNumberTxt);
-            realm.copyToRealmOrUpdate(plates);
-            realm.commitTransaction();
-            realm.close();
-
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -87,7 +74,7 @@ public class CompleteBookFragment extends Fragment implements BlockingStep {
                 }
             }, 2000L);
 
-        }
+
 
     }
 
@@ -104,17 +91,12 @@ public class CompleteBookFragment extends Fragment implements BlockingStep {
 
     @Override
     public void onSelected() {
-        Realm realm = Realm.getDefaultInstance();
-        Plates plates = realm.where(Plates.class).findFirst();
-        if (plates != null && plates.isValid()) {
-            plateNumber.setText(plates.getPlates());
-        }
-        realm.close();
         UserTicket userTicket = dataManager.getUserTicket();
         if (userTicket != null) {
             parkingTime.setText(userTicket.getParkTimeText());
+            Double parkingSpotPrice = dataManager.getParkingSpot().getTickets().getPrice();
             //down to two decimals
-            amountToPay.setText("€" + " " + String.format(Locale.getDefault(), "%.2f", userTicket.getAmountToPay()));
+            amountToPay.setText("€" + " " + String.format(Locale.getDefault(), "%.2f", parkingSpotPrice));
         }
     }
 

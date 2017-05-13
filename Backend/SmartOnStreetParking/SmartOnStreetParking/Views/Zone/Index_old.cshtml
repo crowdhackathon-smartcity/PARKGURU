@@ -1,0 +1,44 @@
+﻿@using GridMvc.Html
+@model IEnumerable<SmartOnStreetParking.Models.Zone>
+
+@{
+    ViewBag.Title = "Zones";
+}
+
+<h2>@ViewBag.Title</h2>
+<div style="text-align:right">
+    <input type="button" value="Add New Zone" style="" @*onclick="location.href='@Url.Action("Create", "User")'"*@ />
+</div>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    @*<hr />*@
+    <div style="width:auto;">
+        @Html.Grid(Model).Columns(columns =>
+   {
+   columns.Add(c => c.Id, true).Titled("ID");
+   columns.Add(c => c.Name).Titled("Name").Filterable(true);
+   columns.Add(c => c.Color).Titled("Color");
+   columns.Add(c => c.Info).Titled("Info");
+   columns.Add(c => c.ParkingMaxDuration).Titled("Max Parking Duration").RenderValueAs(o => o.ParkingMaxDuration + " (minutes)");
+   columns.Add(c => c.IsPayingZone).Titled("Paying Zone");
+   columns.Add().Encoded(false).Sanitized(false).SetWidth(80).RenderValueAs(data => @<button type="button" value="">Edit</button>);
+   columns.Add().Encoded(false).Sanitized(false).SetWidth(80).RenderValueAs(data => @<button type="button" value="">Delete</button>);
+
+
+   }).WithPaging(3).Sortable(true)
+    </div>
+</body>
+
+</html>
+
+<style>
+    /*td[data-name='ParkingMaxDuration'] {
+        text-align: center;*/
+    }
+</style>

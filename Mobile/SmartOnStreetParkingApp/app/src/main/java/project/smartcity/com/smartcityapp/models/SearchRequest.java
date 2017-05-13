@@ -24,6 +24,9 @@ public class SearchRequest {
     @SerializedName("SearchDistance")
     @Expose
     private Integer searchDistance;
+    @SerializedName("VehiclePlate")
+    @Expose
+    private String vehiclePlates;
 
 
 
@@ -57,5 +60,13 @@ public class SearchRequest {
 
     public void setSearchDistance(Integer searchDistance) {
         this.searchDistance = searchDistance;
+    }
+
+    public String getVehiclePlates() {
+        return vehiclePlates;
+    }
+
+    public void setVehiclePlates(String vehiclePlates) {
+        this.vehiclePlates = vehiclePlates;
     }
 }
