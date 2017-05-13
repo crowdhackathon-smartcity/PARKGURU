@@ -2,7 +2,6 @@ package project.smartcity.com.smartcityapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
@@ -108,8 +107,11 @@ public class ChooseTimeFragment extends Fragment implements BlockingStep {
         if (TextUtils.isEmpty(plateNumberTxt)) {
             plateNumber.setError("Empty Plates");
         } else {
-            //continue
             callback.getStepperLayout().showProgress("Complete Book  please wait...");
+            UserTicket userTicket = dataManager.getUserTicket();
+            userTicket.setVehiclePlates(plateNumberTxt);
+            dataManager.saveUserTicket(userTicket);
+            //continue
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             Plates plates = new Plates();
@@ -117,7 +119,6 @@ public class ChooseTimeFragment extends Fragment implements BlockingStep {
             realm.copyToRealmOrUpdate(plates);
             realm.commitTransaction();
 
-            callback.getStepperLayout().showProgress("Operation in progress, please wait...");
             //call compute ticket  for the user selection of the user
             //also keep the payable amount.
             RestInterface restInterface = RestService.getRestApiInterface();
@@ -136,7 +137,10 @@ public class ChooseTimeFragment extends Fragment implements BlockingStep {
                         //update the ticket to parking spot
                         parkingSpot.setTickets(response.body());
                         dataManager.saveParkingSpot(parkingSpot);
+                        callback.getStepperLayout().hideProgress();
                         callback.goToNextStep();
+
+                    } else {
                         callback.getStepperLayout().hideProgress();
                     }
 
@@ -144,7 +148,7 @@ public class ChooseTimeFragment extends Fragment implements BlockingStep {
 
                 @Override
                 public void onFailure(Call<Tickets> call, Throwable t) {
-
+                    callback.getStepperLayout().hideProgress();
                 }
             });
         }

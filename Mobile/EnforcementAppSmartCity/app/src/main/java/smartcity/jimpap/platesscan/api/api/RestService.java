@@ -1,4 +1,4 @@
-package project.smartcity.com.smartcityapp.api;
+package smartcity.jimpap.platesscan.api.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestService {
 
     private static final String API_URL = "https://smartonstreetparkingapi.azurewebsites.net/api/";
-    public static final String  API_KEY = "b82e61fa-8f2c-4fcd-900b-115aed5fe393";
+    public static final String API_KEY = "b82e61fa-8f2c-4fcd-900b-115aed5fe393";
     private static RestInterface restInterface;
 
 
