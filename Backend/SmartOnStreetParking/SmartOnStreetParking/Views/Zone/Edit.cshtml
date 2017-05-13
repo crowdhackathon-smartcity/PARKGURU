@@ -3,12 +3,12 @@
 @model AddZoneViewModel
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Edit";
 }
 
 <div class="page-title">
     <div class="title_left">
-        <h3>New Zone</h3>
+        <h3>Edit Zone</h3>
     </div>
 </div>
 
@@ -33,15 +33,14 @@
             <div class="x_content">
                 @using (Html.BeginForm())
                 {
-
-
                     @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
-
-                        @Html.HiddenFor(model => model.MemberId)
-
+                        <h4>Zone</h4>
+                        <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
                         <div class="form-group">
                             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
@@ -65,14 +64,14 @@
                                 @Html.ValidationMessageFor(model => model.Info, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        @Html.HiddenFor(model => model.MemberId)
                         @*<div class="form-group">
-                                @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.MemberId, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+                            @Html.LabelFor(model => model.MemberId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MemberId, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.ParkingMaxDuration, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -83,12 +82,12 @@
                         </div>
 
                         @*<div class="form-group">
-                                @Html.LabelFor(model => model.TimeTable, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.TimeTable, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.TimeTable, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+                            @Html.LabelFor(model => model.TimeTableAsJson, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TimeTableAsJson, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TimeTableAsJson, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.IsPayingZone, htmlAttributes: new { @class = "control-label col-md-3" })
@@ -100,19 +99,19 @@
                             </div>
                         </div>
 
-                        @*<div class="form-group">
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Visible, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
                                 <div class="checkbox">
-                                    @Html.CheckBoxFor(model => model.Visible, new {@class= "checkbox-fix" })
+                                    @Html.CheckBoxFor(model => model.Visible, new { @class = "checkbox-fix" })
                                     @Html.ValidationMessageFor(model => model.Visible, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                        </div>*@
-
+                        </div>
+                        @Html.HiddenFor(model => model.Deleted)
                         @*<div class="form-group">
-                            @Html.LabelFor(model => model.Deleted, htmlAttributes: new { @class = "control-label col-md-3" })
-                            <div class="col-md-9">
+                            @Html.LabelFor(model => model.Deleted, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
                                 <div class="checkbox">
                                     @Html.EditorFor(model => model.Deleted)
                                     @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
@@ -120,6 +119,7 @@
                             </div>
                         </div>*@
 
+                        @Html.HiddenFor(model => model.DateCreated)
                         @*<div class="form-group">
                             @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -128,6 +128,7 @@
                             </div>
                         </div>*@
 
+                        @Html.HiddenFor(model => model.ReferenceId)
                         @*<div class="form-group">
                             @Html.LabelFor(model => model.ReferenceId, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -147,7 +148,7 @@
                                     <tr>
                                         <td>@Html.CheckBoxFor(model => model.D1.Checked, new { @class = "checkbox-fix" }) </td>
                                         <td>@Html.DisplayFor(model => model.D1.Days)</td>
-                                        <td>@Html.TextBoxFor(model=> model.D1.Start, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.D1.Start, new { @class = "form-control" })</td>
                                         <td> &nbsp; </td>
                                         <td>@Html.TextBoxFor(model => model.D1.End, new { @class = "form-control" })</td>
 
@@ -213,27 +214,25 @@
 
                         <div class="ln_solid"></div>
 
-
-
-
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-success" />
-                                @Html.ActionLink("Cancel", "Index",null,  new  { @class = "btn btn-default" } )
+                                <input type="submit" value="Save" class="btn btn-success" />
+                                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
                             </div>
                         </div>
                     </div>
                 }
+
+
                 @*<div>
                     @Html.ActionLink("Back to List", "Index")
                 </div>*@
+
+
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 
 
