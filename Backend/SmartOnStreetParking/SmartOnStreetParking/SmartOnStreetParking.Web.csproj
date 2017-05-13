@@ -193,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\ZoneController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,6 +296,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\Pages\InternalServerError.cshtml" />
     <Content Include="Views\Pages\NotFound.cshtml" />
+    <Content Include="Views\Zone\Index_old.cshtml" />
+    <Content Include="Views\Zone\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
