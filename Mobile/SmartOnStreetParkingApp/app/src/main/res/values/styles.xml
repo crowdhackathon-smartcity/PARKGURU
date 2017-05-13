@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/green</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+
+    </style>
+
+
+    <style name="FullscreenThemeLoginRegister" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+    <style name="Blue.Button" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/blue</item>
+    </style>
+
+
+    <style name="White.Button" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="EditTextWhiteLineStyle">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/white</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
+
+</resources>
