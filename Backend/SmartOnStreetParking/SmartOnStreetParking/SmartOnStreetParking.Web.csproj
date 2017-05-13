@@ -315,6 +315,8 @@
     <Content Include="Views\Zone\Edit.cshtml" />
     <Content Include="Views\ParkingSpot\Index.cshtml" />
     <Content Include="Views\ParkingSpot\Add.cshtml" />
+    <Content Include="Views\ParkingSpot\Import.cshtml" />
+    <Content Include="Views\ParkingSpot\StartImport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

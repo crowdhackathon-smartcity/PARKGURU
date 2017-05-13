@@ -1,0 +1,55 @@
+﻿@using SmartOnStreetParking.Web.Models
+
+@model ImportResultViewModel
+
+@{
+    ViewBag.Title = "Import";
+}
+
+<h2>Import</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    @using (Html.BeginForm("Add", "ParkingSpot", FormMethod.Post, new { id = "submitForm", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        for (var i = 0; i < Model.Items.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(m => m.Items[i].Checked)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].ReferenceId)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].StreetAddress)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].From_Latidute)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].From_Longitude)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].To_Latidute)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].To_Longitude)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Items[i].Capacity)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+            </tr>
+        }
+    }
+</table>

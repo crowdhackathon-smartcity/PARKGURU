@@ -21,6 +21,9 @@ public class BookingHistoryFragment extends Fragment {
     public BookingHistoryFragment() {
     }
 
+    //the idea is to persist the bookings as well but due to time limitations
+    //i am going to just display them through an api call
+
 
     private RecyclerView recyclerView;
     BookingsAdapter bookingsAdapter;
@@ -32,11 +35,11 @@ public class BookingHistoryFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         //load realm results on adapter
 
-        bookingsAdapter = new BookingsAdapter(getActivity(), null);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(bookingsAdapter);
+//        bookingsAdapter = new BookingsAdapter(getActivity(), null);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(bookingsAdapter);
 
         return view;
     }

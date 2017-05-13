@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import project.smartcity.com.smartcityapp.models.CalculateTicketsRequest;
 import project.smartcity.com.smartcityapp.models.ParkingSpot;
+import project.smartcity.com.smartcityapp.models.PaymentRequest;
+import project.smartcity.com.smartcityapp.models.PaymentResponse;
 import project.smartcity.com.smartcityapp.models.SearchRequest;
 import project.smartcity.com.smartcityapp.models.Tickets;
 import retrofit2.Call;
@@ -22,6 +24,9 @@ public interface RestInterface {
 
     @POST("Default/CalcSpotTickets")
     Call<Tickets> calculateTickets(@Body CalculateTicketsRequest ticketsRequest);
+
+    @POST("Default/Pay")
+    Call<PaymentResponse> createPayment(@Body PaymentRequest paymentRequest);
 
 
 

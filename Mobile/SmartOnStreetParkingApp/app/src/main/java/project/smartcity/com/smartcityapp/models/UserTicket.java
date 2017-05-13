@@ -14,6 +14,7 @@ public class UserTicket {
     private String parkTimeText; //park time string
     private double amountToPay;
     private String address;
+    private String vehiclePlates;
 
 
     public int getParkTime() {
@@ -46,5 +47,13 @@ public class UserTicket {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getVehiclePlates() {
+        return vehiclePlates;
+    }
+
+    public void setVehiclePlates(String vehiclePlates) {
+        this.vehiclePlates = vehiclePlates;
     }
 }
