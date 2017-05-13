@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartOnStreetParking.Models.ViewModels
 {
-    public class SpotTicketsResponse
+    public class SpotTickets
     {
 
         public decimal Price { get; set; }

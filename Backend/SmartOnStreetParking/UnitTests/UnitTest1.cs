@@ -56,7 +56,24 @@ namespace UnitTests
             CalcTicketsRequest.VehiclePlate = "KPH5144";
             IAPIRepository _APIRepository = new APIRepository();
 
-            SpotTicketsResponse ForMitsos = _APIRepository.CalcSpotTickets(CalcTicketsRequest);
+            SpotTickets ForMitsos = _APIRepository.CalcSpotTickets(CalcTicketsRequest);
+        }
+
+        [TestMethod]
+        public void TestPayments()
+        {
+            PayRequest PayRequest = new PayRequest();
+            PayRequest.SpotId = 1;
+            PayRequest.SpotTickets = new SpotTickets();
+            PayRequest.SpotTickets.Price = 12;
+            PayRequest.SpotTickets.Tickets = new List<Ticket>();
+            PayRequest.SpotTickets.Tickets.Add(new Ticket { Price = 12, Duration=60 });
+            PayRequest.VehiclePlate = "KPH5144";
+            PayRequest.APIkey= "b82e61fa-8f2c-4fcd-900b-115aed5fe393";
+            
+            IAPIRepository _APIRepository = new APIRepository();
+
+            Payment ForMitsos = _APIRepository.Pay(PayRequest);
         }
 
         [TestMethod]

@@ -64,6 +64,7 @@
     <Compile Include="Enums\MemberType.cs" />
     <Compile Include="Enums\ParkingSpotStatus.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Models\BasicAuthorizationFilter.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Models\Coordinate.cs" />
