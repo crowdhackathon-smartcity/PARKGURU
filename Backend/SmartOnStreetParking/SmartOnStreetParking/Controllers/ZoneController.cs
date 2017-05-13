@@ -38,7 +38,8 @@ namespace SmartOnStreetParking.Web.Controllers
             AddZoneViewModel ViewModel = new AddZoneViewModel();
 
             ViewModel.MemberId = GetMember().Id;
-
+            ViewModel.ParkingMaxDuration = 360;
+            ViewModel.IsPayingZone = true;
 
             return View(ViewModel);
         }
@@ -48,28 +49,45 @@ namespace SmartOnStreetParking.Web.Controllers
         /// </summary>
         /// <param name="AccountInfo">The details of the new account.</param>
         /// <returns>ActionResult</returns>
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Add(AccountSettings_ViewModel AccountInfo)
-        //{
-        //    if (!ModelState.IsValid) { return View(AccountInfo); }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(AddZoneViewModel ZoneInfo)
+        {
+            if (!ModelState.IsValid) { return View(ZoneInfo); }
 
+            Zone ZoneModel = new Zone()
+            {
+                Color = ZoneInfo.Color,
+                Deleted = false,
+                IsPayingZone = ZoneInfo.IsPayingZone,
+                MemberId = ZoneInfo.MemberId,
+                Name = ZoneInfo.Name,
+                ParkingMaxDuration = ZoneInfo.ParkingMaxDuration,
+                Info = ZoneInfo.Info,
+                Visible = true,
+                DateCreated=DateTime.UtcNow,                
+                ParkingTimeTable = ZoneInfo.CreateTimeTable()
+            };
+
+            _Repository.Add(ZoneModel);
+
+            return RedirectToAction("Index");
         //    var config = new MapperConfiguration(cfg => cfg.CreateMap<AccountSettings_ViewModel, AccountSettings>());
         //    var mapper = config.CreateMapper();
         //    AccountSettings NewAccount = mapper.Map<AccountSettings_ViewModel, AccountSettings>(AccountInfo);
 
-        //    _Repository.Add(NewAccount);
+            //    _Repository.Add(NewAccount);
 
-        //    if (AccountInfo.Type == BankingAccountType.Bank)
-        //    {
+            //    if (AccountInfo.Type == BankingAccountType.Bank)
+            //    {
 
-        //        return RedirectToAction(BankingControllerIndex.BankIndex);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction(BankingControllerIndex.PaypalIndex);
-        //    }
-        //}
+            //        return RedirectToAction(BankingControllerIndex.BankIndex);
+            //    }
+            //    else
+            //    {
+            //        return RedirectToAction(BankingControllerIndex.PaypalIndex);
+            //    }
+        }
 
     }
 
