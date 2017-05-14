@@ -65,7 +65,7 @@ namespace SmartOnStreetParking.Web.Controllers
 
            _Repository.Edit(MemberInfo);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","ParkingSpot");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SmartOnStreetParking.Repositories
             using (var DBContext = new SmartOnStreetParkingDbContext())
             {
                 DBContext.Configuration.ProxyCreationEnabled = false;
-                var ParkingSpots = DBContext.ParkingSpots.Where(ps => ps.Zone.MemberId == MemberId);
+                var ParkingSpots = DBContext.ParkingSpots.Include("Zone").Where(ps => ps.Zone.MemberId == MemberId);
                 if (ParkingSpots.Count() == 0)
                 {
                     return new List<ParkingSpot>();
