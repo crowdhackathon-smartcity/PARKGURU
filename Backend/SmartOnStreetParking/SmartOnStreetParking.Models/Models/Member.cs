@@ -62,9 +62,14 @@ namespace SmartOnStreetParking.Models
         [Column("Member_RevenuePercentAsProv")]
         public decimal RevenuePercentAsProv { get; set; }
 
-        
+        [Column("Member_BankApiKey")]
+        public string BankApiKey { get; set; }
 
+        [Column("Member_BankApiSecret")]
+        public string BankApiSecret { get; set; }
 
+        [Column("Member_IBAN")]
+        public string IBAN { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Zone> Zones { get; set; }
