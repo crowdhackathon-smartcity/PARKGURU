@@ -32,6 +32,13 @@ namespace UnitTests
             
         }
 
+        [TestMethod]
+        public void TestNBGGetAllBanks()
+        {
+            INBGRepository myREP = new NBGRepository();
+            myREP.GetBanks();
+        }
+
 
         [TestMethod]
         public void TestFind()

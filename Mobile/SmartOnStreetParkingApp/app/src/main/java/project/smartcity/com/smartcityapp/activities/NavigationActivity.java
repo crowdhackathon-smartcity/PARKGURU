@@ -103,9 +103,9 @@ public class NavigationActivity extends AppCompatActivity
         if (id == R.id.nav_map) {
             loadMapFragment();
         }
-//        } else if (id == R.id.nav_history) {
-//            loadHistoryFragment();
-//        }
+         else if (id == R.id.nav_history) {
+            loadHistoryFragment();
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

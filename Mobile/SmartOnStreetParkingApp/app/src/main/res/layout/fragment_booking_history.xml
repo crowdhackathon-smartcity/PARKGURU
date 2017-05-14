@@ -2,9 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="project.smartcity.com.smartcityapp.fragments.BookingHistoryFragment">
+    tools:context="project.smartcity.com.smartcityapp.fragments.BookingHistoryFragment"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/addressList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:padding="5dp" />
 
     <android.support.v7.widget.RecyclerView
+        android:layout_margin="10dp"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
