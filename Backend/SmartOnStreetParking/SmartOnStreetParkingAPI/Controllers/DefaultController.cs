@@ -56,7 +56,7 @@ namespace SmartOnStreetParking.API.Controllers
         /// <param name="CurrencyCode">Currency Code</param>
         /// <returns>Http status 200 on success, http exception on fail</returns>
         [HttpGet]
-        public IHttpActionResult TransferMoney(string DevAPIKey, string DevApiSecret,string DestinationIBAN,decimal Amount, string CurrencyCode )
+        public IHttpActionResult TransferMoney(string DevAPIKey, string DevApiSecret,string DestinationIBAN, double Amount, string CurrencyCode )
         {
 
             return Ok(_APIRepository.TransferMoney( DevAPIKey,  DevApiSecret,  DestinationIBAN,  Amount,  CurrencyCode));
