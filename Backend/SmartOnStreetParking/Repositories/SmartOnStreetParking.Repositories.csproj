@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INBGRepository.cs" />
     <Compile Include="MemberRepository.cs" />
     <Compile Include="APIAuth.cs" />
     <Compile Include="APIRepository.cs" />
@@ -60,6 +62,12 @@
     <Compile Include="IGeneralRepository.cs" />
     <Compile Include="IImportRepository.cs" />
     <Compile Include="ImportRepository.cs" />
+    <Compile Include="NBGAPI\NBGAccount.cs" />
+    <Compile Include="NBGAPI\NBGAuthenticationInfo.cs" />
+    <Compile Include="NBGAPI\NBGBank.cs" />
+    <Compile Include="NBGAPI\NBGCustomer.cs" />
+    <Compile Include="NBGAPI\NBGHandler.cs" />
+    <Compile Include="NBGRepository.cs" />
     <Compile Include="ParkingSpotImport\ImportedParkingSpot.cs" />
     <Compile Include="ParkingSpotImport\ParkingSpotImportHandler.cs" />
     <Compile Include="ParkingSpotImport\ParkingSpotImportHelper.cs" />
@@ -75,6 +83,7 @@
       <Name>SmartOnStreetParking.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
