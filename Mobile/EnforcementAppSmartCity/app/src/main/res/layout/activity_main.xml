@@ -17,15 +17,17 @@
         android:layout_height="200dp"/>
 
     <TextView
-        android:textColor="@color/red"
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:freezesText="true"
-        android:textSize="20sp"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:textColor="@color/red"
+        android:textSize="20sp" />
 
     <Button
+        android:theme="@style/Blue.Button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +46,8 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:theme="@style/Blue.Button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/submit_plates"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
