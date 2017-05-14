@@ -127,16 +127,17 @@ namespace SmartOnStreetParking.Repositories
         }
 
 
-        public bool TransferMoney(string DevAPIKey, string DevApiSecret, string DestinationIBAN, decimal Amount, string CurrencyCode)
+        public bool TransferMoney(string DevAPIKey, string DevApiSecret, string DestinationIBAN, double Amount, string CurrencyCode)
         {
 
             using (var DBContext = new SmartOnStreetParkingDbContext())
             {
-                var Member = DBContext.Members.Where(o => o.ApiKey==DevAPIKey && o.ApiSecret==DevApiSecret);
+                var Member = DBContext.Members.Where(o => o.ApiKey==DevAPIKey && o.ApiSecret==DevApiSecret).FirstOrDefault();
                 if (Member == null)
                     throw new HttpException(404, "Unknown developer");
+                NBGRepository NBG = new NBGRepository();
+                return NBG.MakeTransaction(Member.BankApiKey, Member.BankApiSecret, Member.IBAN, DestinationIBAN, CurrencyCode, Amount);
 
-                return true;
             }
 
         }
