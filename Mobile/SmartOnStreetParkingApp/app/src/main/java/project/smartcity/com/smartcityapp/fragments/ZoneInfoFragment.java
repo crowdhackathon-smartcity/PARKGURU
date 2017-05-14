@@ -67,7 +67,7 @@ public class ZoneInfoFragment extends Fragment implements Step {
         zoneInfo.setText(data.getZoneInfo());
         String logo = data.getProviderLogo();
         if (logo != null) {
-            Picasso.with(getActivity()).load(logo).fit().centerCrop().error(R.drawable.sos_parking).into(zoneImage);
+            Picasso.with(getActivity()).load(logo).fit().error(R.drawable.sos_parking).into(zoneImage);
         }
         //load address in another thread (this should be done on an background thread)
         //but Geocoder doesn't take too much to respond so we are ok for now.

@@ -36,7 +36,8 @@ namespace UnitTests
         public void TestNBGGetAllBanks()
         {
             INBGRepository myREP = new NBGRepository();
-            myREP.GetBanks();
+            //myREP.GetBanks();
+            myREP.MakeTransaction("123456789", "135d4237ab144da79fc3d3e577faa971", "GR176517658765876556", "GR176517658765876877", "USD", 10);
         }
 
 

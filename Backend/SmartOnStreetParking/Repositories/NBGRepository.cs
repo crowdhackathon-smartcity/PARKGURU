@@ -34,8 +34,9 @@ namespace SmartOnStreetParking.Repositories
             NBGAuthInfo.OcpApimSubscriptionKey = NBGAuthToken;// "135d4237ab144da79fc3d3e577faa971";
 
             NBGHandler NBGObject = new NBGHandler(NBGAuthInfo);
-            NBGObject.requestTransaction();
-            return true;
+            Boolean result = NBGObject.requestTransaction(FromIBAN, ToIBAN, currency , ammount);
+
+            return result;
 
         }
     }

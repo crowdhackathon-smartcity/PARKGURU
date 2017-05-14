@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ import project.smartcity.com.smartcityapp.api.RestInterface;
 import project.smartcity.com.smartcityapp.api.RestService;
 import project.smartcity.com.smartcityapp.models.PaymentResponse;
 import project.smartcity.com.smartcityapp.models.Plates;
-import project.smartcity.com.smartcityapp.models.UserTicket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

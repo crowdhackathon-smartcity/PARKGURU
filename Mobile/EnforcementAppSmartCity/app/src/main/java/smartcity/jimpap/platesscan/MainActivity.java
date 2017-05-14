@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                                             + " Confidence: " + String.format("%.2f", results.getResults().get(0).getConfidence()) + "%"
                                             // Convert processing time to seconds and trim to two decimal places
                                             + " Processing time: " + String.format("%.2f", ((results.getProcessing_time_ms() / 1000.0) % 60)) + " seconds");
-                                    submitPlates.setText(results.getResults().get(0).getPlate());
+                                    editPlate.setText(results.getResults().get(0).getPlate());
                                 }
                             }
                         });

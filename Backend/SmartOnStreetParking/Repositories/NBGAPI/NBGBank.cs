@@ -35,7 +35,7 @@ namespace SmartOnStreetParking.Repositories.NBGAPI
         
 
        
-        public void RequestTransaction(NBGAuthenticationInfo NBGAuthInfo)
+        public Boolean RequestTransaction(NBGAuthenticationInfo NBGAuthInfo, string FromIBAN, string ToIBAN, string currency, double ammount)
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -46,6 +46,9 @@ namespace SmartOnStreetParking.Repositories.NBGAPI
             client.DefaultRequestHeaders.Add("Auth-ID", NBGAuthInfo.AuthID);
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", NBGAuthInfo.OcpApimSubscriptionKey);
 
+
+            return true;
+
             var uri = "https://nbgdemo.azure-api.net/nodeopenapi/api/banks/{BANK_ID}/transaction-request-types/{TYPE}/transaction-requests?" + queryString;
 
             HttpResponseMessage response;
@@ -55,9 +58,14 @@ namespace SmartOnStreetParking.Repositories.NBGAPI
 
             using (var content = new ByteArrayContent(byteData))
             {
-                content.Headers.ContentType = new MediaTypeHeaderValue("< your content type, i.e. application/json >");
+                //string tmpBody =  string.Format("{ 'description': '{0}', 'challenge_type': '{1}', 'from': { '{account_id': '{2}','bank_id': '{3}'}, 'to': { 'account_id': '{4}', 'bank_id': '{5}'},'value': { 'currency': '{6}','amount': '{7}' } }", "Transaction Desr", "put", FromIBAN, "574b37a801759c440e77c3fe", ToIBAN, "574b37a801759c440e77c3fe", currency, ammount.ToString());
+                string tmpBody = string.Empty;// "{'still waiting for NBG support' }";
+                //content.Headers.ContentType = new MediaTypeHeaderValue("< your content type, i.e. application/json >");
+                content.Headers.ContentType = new MediaTypeHeaderValue(tmpBody);
                 response = client.PutAsync(uri, content).Result;
             }
+
+            return true;
         }
 
     }
