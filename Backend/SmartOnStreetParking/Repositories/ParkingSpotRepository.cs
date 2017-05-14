@@ -23,7 +23,7 @@ namespace SmartOnStreetParking.Repositories
                 }
                 else
                 {
-                    return DBContext.ParkingSpots.ToList();
+                    return ParkingSpots.ToList();
                 }
             }
         }

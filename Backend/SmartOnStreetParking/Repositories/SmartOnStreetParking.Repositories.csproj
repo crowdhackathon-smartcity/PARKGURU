@@ -71,6 +71,7 @@
     <Compile Include="PaymentRepository.cs" />
     <Compile Include="ParkingSpotRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicketRepository.cs" />
     <Compile Include="ZoneRepository.cs" />
   </ItemGroup>
   <ItemGroup>
