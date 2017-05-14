@@ -62,7 +62,7 @@ public class ZoneInfoFragment extends Fragment implements Step {
     @Override
     public void onSelected() {
         //update UI when selected
-        ParkingSpot data = dataManager.getParkingSpot();
+        final ParkingSpot data = dataManager.getParkingSpot();
         zoneName.setText(data.getZoneName());
         zoneInfo.setText(data.getZoneInfo());
         String logo = data.getProviderLogo();
@@ -74,7 +74,8 @@ public class ZoneInfoFragment extends Fragment implements Step {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String address = addressProvider.getAddress(new LatLng(38.017583, 23.797913));
+                LatLng latLng = new LatLng(data.getGeometryEdges().get(0).getLatitude(),data.getGeometryEdges().get(0).getLongitude());
+                String address = addressProvider.getAddress(latLng);
                 handler.sendMessage(Message.obtain(handler, 100, address));
             }
         });

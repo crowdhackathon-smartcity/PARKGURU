@@ -44,6 +44,22 @@ namespace SmartOnStreetParking.Web.Controllers
             return View(ViewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Ticket TicketInfo)
+        {
+            if (!ModelState.IsValid) { return View(TicketInfo); }
+
+
+
+            _Repository.Add(TicketInfo);
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
 
         private List<SelectListItem> LoadZones(long MemberId)
         {

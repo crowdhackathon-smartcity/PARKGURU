@@ -26,11 +26,24 @@ namespace SmartOnStreetParking.Repositories
                 }
             }
         }
+
+        public Ticket Add(Ticket TicketInfo)
+        {
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                DBContext.Tickets.Add(TicketInfo);
+                DBContext.SaveChanges();
+            }
+            return TicketInfo;
+        }
     }
 
 
     public interface ITicketRepository
     {
         List<Ticket> GetByMember(Int64 MemberId);
+
+        Ticket Add(Ticket TicketInfo);
     }
 }
