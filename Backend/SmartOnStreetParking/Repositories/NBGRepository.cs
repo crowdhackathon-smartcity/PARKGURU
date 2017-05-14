@@ -23,7 +23,7 @@ namespace SmartOnStreetParking.Repositories
             NBGObject.GetAllBanks();
         }
 
-        public void MakeTransaction(string NBGAuthID, string NBGAuthToken, string FromIBAN, string ToIBAN, string currency, double ammount)
+        public Boolean MakeTransaction(string NBGAuthID, string NBGAuthToken, string FromIBAN, string ToIBAN, string currency, double ammount)
         {
             //Set default values for demo usage
             //TODO : Remove this initialization code
@@ -36,7 +36,7 @@ namespace SmartOnStreetParking.Repositories
             NBGHandler NBGObject = new NBGHandler(NBGAuthInfo);
             Boolean result = NBGObject.requestTransaction(FromIBAN, ToIBAN, currency , ammount);
 
-            //return result;
+            return result;
 
         }
     }
