@@ -284,6 +284,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 lineOptions.width(5);
                 lineOptions.color(Color.parseColor(onStreetColor));
                 Polyline polyline = mMap.addPolyline(lineOptions);
+                polyline.setClickable(true);
                 polylineParkingSpotHashMap.put(polyline, parkingSpot);
 
             }
@@ -300,6 +301,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 polygonOptions.strokeWidth(2);
                 polygonOptions.fillColor(Color.parseColor(onStreetColor));
                 Polygon polygon = mMap.addPolygon(polygonOptions);
+                polygon.setClickable(true);
                 polygonParkingSpotHashMap.put(polygon, parkingSpot);
             }
 
