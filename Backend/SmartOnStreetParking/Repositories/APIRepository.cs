@@ -6,6 +6,7 @@ using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SmartOnStreetParking.Repositories
 {
@@ -123,6 +124,22 @@ namespace SmartOnStreetParking.Repositories
             }
 
             return Ret;
+        }
+
+
+        public bool TransferMoney(string DevAPIKey, string DevApiSecret, string DestinationIBAN, double Amount, string CurrencyCode)
+        {
+
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                var Member = DBContext.Members.Where(o => o.ApiKey==DevAPIKey && o.ApiSecret==DevApiSecret).FirstOrDefault();
+                if (Member == null)
+                    throw new HttpException(404, "Unknown developer");
+                NBGRepository NBG = new NBGRepository();
+                return NBG.MakeTransaction(Member.BankApiKey, Member.BankApiSecret, Member.IBAN, DestinationIBAN, CurrencyCode, Amount);
+
+            }
+
         }
 
 

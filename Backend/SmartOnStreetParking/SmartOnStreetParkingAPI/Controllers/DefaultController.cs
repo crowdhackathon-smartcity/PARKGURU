@@ -43,6 +43,26 @@ namespace SmartOnStreetParking.API.Controllers
             return Ok(_APIRepository.SearchSpots(SearchSpotsRequest));
         }
 
+
+
+
+        /// <summary>
+        /// Transfer money from Developer's registered bank account to 3rd bank account
+        /// </summary>
+        /// <param name="DevAPIKey">The Dev API Key</param>
+        /// <param name="DevApiSecret">The Developer API Secret</param>
+        /// <param name="DestinationIBAN">The 3rd bank account</param>
+        /// <param name="Amount">Amount</param>
+        /// <param name="CurrencyCode">Currency Code</param>
+        /// <returns>Http status 200 on success, http exception on fail</returns>
+        [HttpGet]
+        public IHttpActionResult TransferMoney(string DevAPIKey, string DevApiSecret,string DestinationIBAN, double Amount, string CurrencyCode )
+        {
+
+            return Ok(_APIRepository.TransferMoney( DevAPIKey,  DevApiSecret,  DestinationIBAN,  Amount,  CurrencyCode));
+        }
+
+
         /// <summary>
         /// Check if a vehicle plate has a valid active payment
         /// </summary>
