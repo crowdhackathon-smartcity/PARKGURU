@@ -8,15 +8,17 @@ import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,19 +40,33 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import smartcity.jimpap.platesscan.api.api.RestInterface;
+import smartcity.jimpap.platesscan.api.api.RestService;
+import smartcity.jimpap.platesscan.models.PaymentResponse;
+
 public class MainActivity extends AppCompatActivity {
 
 
     private static final int REQUEST_IMAGE = 100;
-    private static final int STORAGE=1;
+    private static final int STORAGE = 1;
     private String ANDROID_DATA_DIR;
     private static File destination;
     private TextView resultTextView;
     private ImageView imageView;
+    private EditText editPlate;
+    private Button submitPlates;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        editPlate = (EditText) findViewById(R.id.edit_plates);
+        submitPlates = (Button) findViewById(R.id.submit_plates);
+
+
         ANDROID_DATA_DIR = this.getApplicationInfo().dataDir;
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
@@ -63,6 +79,33 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
 
         resultTextView.setText("Press the button below to start a request.");
+
+        submitPlates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String platesTxt = editPlate.getText().toString();
+                RestInterface restInterface = RestService.getRestApiInterface();
+                Call<PaymentResponse> call = restInterface.checkPlate(platesTxt , RestService.API_KEY);
+                call.enqueue(new Callback<PaymentResponse>() {
+                    @Override
+                    public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
+                        if (response.isSuccessful()){
+                            resultTextView.setText("Vehicle with plate " + platesTxt + " has parked");
+                        } else {
+                            resultTextView.setText("Vehicle with plate not available");
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PaymentResponse> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        });
     }
 
     @Override
@@ -98,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                                             + " Confidence: " + String.format("%.2f", results.getResults().get(0).getConfidence()) + "%"
                                             // Convert processing time to seconds and trim to two decimal places
                                             + " Processing time: " + String.format("%.2f", ((results.getProcessing_time_ms() / 1000.0) % 60)) + " seconds");
+                                    submitPlates.setText(results.getResults().get(0).getPlate());
                                 }
                             }
                         });
@@ -136,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
-            case STORAGE:{
+            case STORAGE: {
                 Map<String, Integer> perms = new HashMap<>();
                 // Initial
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);

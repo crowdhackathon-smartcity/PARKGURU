@@ -25,6 +25,7 @@ namespace SmartOnStreetParking.Repositories.ParkingSpotImport
 
     public class ImportedParkingSpot
     {
+        public bool Checked { get; set; }
 
         /// <summary>
         /// Constructor used to pass the initial imported xml values

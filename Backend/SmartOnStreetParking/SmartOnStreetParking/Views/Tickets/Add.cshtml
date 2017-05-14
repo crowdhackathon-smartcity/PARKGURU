@@ -1,0 +1,87 @@
+﻿@model SmartOnStreetParking.Models.Ticket
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>New Ticket</h3>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+
+<div class="row">
+    <div class="col-sm-12,col-md-12,col-lg-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ticket Information</h2>
+
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        &nbsp;
+                    </li>
+
+                </ul>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SN, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.ZoneId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <label class="control-label col-md-2">Zone</label>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.ZoneId, (List<SelectListItem>)ViewBag.ZoneList, "Please select a Zone", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ZoneId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-success" />
+                                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    </div>
+                }
+
+          
+            </div>
+        </div>
+    </div>
+</div>

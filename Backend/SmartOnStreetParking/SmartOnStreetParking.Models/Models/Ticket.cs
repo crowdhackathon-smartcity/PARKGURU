@@ -19,13 +19,19 @@ namespace SmartOnStreetParking.Models
         [JsonIgnore]
         public long Id { get; set; }
 
-
+        /// <summary>
+        /// Ticket serial number if provided
+        /// </summary>
         [Column("Ticket_SN")]
         public string SN { get; set; }
-
+        /// <summary>
+        /// Ticket duration
+        /// </summary>
         [Column("Ticket_Duration")]
         public int Duration { get; set; }
-
+        /// <summary>
+        /// Ticket price for duration
+        /// </summary>
         [Column("Ticket_Price")]
         public decimal Price { get; set; }
 

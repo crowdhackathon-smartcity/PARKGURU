@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SmartOnStreetParking.Models;
+using SmartOnStreetParking.Web.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,12 @@ namespace SmartOnStreetParking.Web.Utils
 {
     public class BaseController: Controller
     {
+
+        protected Member GetMember()
+        {
+            return  ApplicationCache.GetMember(Convert.ToInt64(User.Identity.GetProperty("Member_Id")));
+        }
+
 
         /// <summary>
         /// Default Error handling for controller.

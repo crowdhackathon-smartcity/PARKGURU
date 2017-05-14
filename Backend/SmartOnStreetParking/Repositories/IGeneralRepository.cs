@@ -8,5 +8,6 @@ namespace SmartOnStreetParking.Repositories
 {
     public interface IGeneralRepository
     {
+        List<dynamic> GetZonesLight(Int64 MemberId);
     }
 }

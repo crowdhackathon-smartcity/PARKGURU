@@ -42,6 +42,7 @@ namespace SmartOnStreetParking.Repositories
             {
 
 
+
                 var ParkingSpots = DBContext.ParkingSpots
                     .Include("Zone")
                     .Include("Zone.Tickets")
@@ -101,16 +102,19 @@ namespace SmartOnStreetParking.Repositories
         }
 
 
-        private SpotTicketsResponse CalcSpotTickets(Zone Zone, int Duration,string VehiclePlate)
+        private SpotTickets CalcSpotTickets(Zone Zone, int Duration,string VehiclePlate)
         {
-            SpotTicketsResponse Ret = new SpotTicketsResponse();
+            SpotTickets Ret = new SpotTickets();
             Ret.Tickets = new List<Ticket>();
             if (Zone.ParkingMaxDuration < Duration)
                 return Ret;
             
             while (Duration>0)
             {
-                var BestTicket = Zone.Tickets.Where(u => u.Duration <= Duration).OrderByDescending(i => i.Duration).FirstOrDefault();
+                var BestTicket = Zone.Tickets.Where(u => u.Duration > Duration).OrderBy(i => i.Duration).FirstOrDefault();
+                if (BestTicket == null)
+                    BestTicket = Zone.Tickets.Where(u => u.Duration <= Duration).OrderByDescending(i => i.Duration).FirstOrDefault();
+
                 if (BestTicket == null)
                     break;
                 Ret.Tickets.Add(new Ticket {Duration=BestTicket.Duration, Price=BestTicket.Price, SN=BestTicket.SN });
@@ -121,7 +125,60 @@ namespace SmartOnStreetParking.Repositories
             return Ret;
         }
 
-        public SpotTicketsResponse CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest)
+
+        public Payment CheckPlate(string VehiclePlate, string APIKey)
+        {
+
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                var Payments = DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey && o.Start <= DateTime.UtcNow).ToList();
+
+
+                return Payments.Where(o => o.Start>= DateTime.UtcNow.AddMinutes(-o.Duration)).FirstOrDefault();
+            }
+
+        }
+
+
+        public List<Payment> GetPayments(string VehiclePlate, string APIKey)
+        {
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+                return DBContext.Payments.Where(o => o.VehiclePlate.Contains(VehiclePlate) && o.APIKey == APIKey).ToList();
+            }
+
+        }
+
+        public Payment Pay(PayRequest PayRequest)
+        {
+
+            
+            using (var DBContext = new SmartOnStreetParkingDbContext())
+            {
+
+                Member Member = DBContext.Members.Where(u => u.ApiKey == PayRequest.APIkey).FirstOrDefault();
+                var Payment = new Payment()
+                {
+                    APIKey = PayRequest.APIkey,
+                    MemberId= Member.Id,
+                    Duration = PayRequest.SpotTickets.Tickets.Select(i => i.Duration).DefaultIfEmpty().Sum(),
+                    ParkingSpotId=PayRequest.SpotId,
+                    VehiclePlate= PayRequest.VehiclePlate,
+                    Ticket= PayRequest.SpotTickets,
+                    Start=DateTime.UtcNow
+
+                    
+                };
+
+                DBContext.Payments.Add(Payment);
+                DBContext.SaveChanges();
+                return Payment;
+            }
+            
+        }
+
+        public SpotTickets CalcSpotTickets(CalcTicketsRequest CalcTicketsRequest)
         {
 
             using (var DBContext = new SmartOnStreetParkingDbContext())

@@ -21,14 +21,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:freezesText="true"
-        android:textSize="20sp"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:textColor="@color/red"
+        android:textSize="20sp" />
 
     <Button
+        android:theme="@style/Blue.Button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Plate Scan"/>
+
+    <TextView
+        android:layout_margin="10dp"
+        android:text="Manually Add Plate Scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_plates"
+        android:layout_margin="10dp"
+        android:hint="Plate number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:theme="@style/Blue.Button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/submit_plates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Plates"/>
 
 
 

@@ -61,36 +61,44 @@ namespace SmartOnStreetParking.Models
 
 
         /// <summary>
-        /// Max allowed parking duration
+        /// Serialized TimeTable
         /// </summary>        
         [Column("Zone_TimeTable")]
         [JsonIgnore]
-        public string TimeTable
-        { 
-        get
+        public string TimeTableAsJson
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// The Discount By Availability State. Takes effect when DiscountType==ByAvailabilityState
+        /// </summary>  
+        [NotMapped]
+        public List<ParkingTimeTable> ParkingTimeTable
+        {
+            get
             {
-                return JsonConvert.SerializeObject(ParkingTimeTable);
+                return TimeTableAsJson == null ? new List<ParkingTimeTable>() : JsonConvert.DeserializeObject<List<ParkingTimeTable>>(TimeTableAsJson);
             }
-        set
+            set
             {
                 try
                 {
-                    ParkingTimeTable = JsonConvert.DeserializeObject<List<ParkingTimeTable>>(value == null ? "" : value);
+                    if (value == null)
+                    {
+                        TimeTableAsJson = null;
+                    }
+                    else
+                    {
+                        TimeTableAsJson = JsonConvert.SerializeObject(value);
+                    }
+
 
                 }
                 catch
                 { }
-                
-            }
-        }
 
-/// <summary>
-/// The Discount By Availability State. Takes effect when DiscountType==ByAvailabilityState
-/// </summary>  
-[NotMapped]
-        public List<ParkingTimeTable> ParkingTimeTable
-        {
-            get; set;
+            }
         }
 
 
@@ -130,7 +138,7 @@ namespace SmartOnStreetParking.Models
         public virtual ICollection<ParkingSpot> ParkingSpots { get; set; }
 
         [JsonIgnore]
-        public virtual Member Member{ get; set; }
+        public virtual Member Member { get; set; }
 
 
         [JsonIgnore]

@@ -1,0 +1,247 @@
+﻿@model SmartOnStreetParking.Web.Models.AddParkingSpotViewModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>New Parking Spot</h3>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-sm-12,col-md-12,col-lg-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Parking Spot Information</h2>
+
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        &nbsp;
+                    </li>
+
+                </ul>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                @using (Html.BeginForm("Add", "ParkingSpot", FormMethod.Post, new { id = "submitForm", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>ParkingSpot</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @Html.HiddenFor(model => model.GeometryType)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Info, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Info, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Info, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.ZoneId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <label class="control-label col-md-2">Zone</label>
+                            <div class="col-md-10">
+
+                                @Html.DropDownListFor(model => model.ZoneId, (List<SelectListItem>)ViewBag.ZoneList, "Please select a Zone", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ZoneId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StreetView, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.StreetView, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StreetView, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Visible, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Visible)
+                                        @Html.ValidationMessageFor(model => model.Visible, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Deleted, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Deleted)
+                                        @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ReferenceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ReferenceId, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ReferenceId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GeometryEdges, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.HiddenFor(m => m.StringEdges, new { htmlAttributes = new { @class = "form-control", type = "text", @readonly = "true", @style = "color:#c0c0c0" } })
+                                <div class="col-md-8" id="mapImage">
+                                    <div class="google-map" id="map" style="height:300px"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div>
+                                        &nbsp;
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-block btn-danger" onclick="clearMap();">
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-10">@Html.ValidationMessageFor(model => model.GeometryEdges, null, new { @class = "validatation-error" })</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-success" />
+                                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/maps")
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW2DhYWHrIk87gfJZr0gnnYTm2GqcebtY&libraries=places&callback=init">
+    </script>
+
+    <script type="text/javascript">
+
+        var map;
+        var creator;
+        var pano;
+
+        $(document).ready(function () {
+
+
+            $('form#submitForm').submit(function (e) {
+
+                var data = creator.showData();
+                if (data.length == 0) {
+                    $("#GeometryEdges").val("");
+                }
+                else {
+                    var jsonstr = JSON.stringify(data);
+                    if (typeof (jsonstr) != 'undefined') {
+                        $("#StringEdges").val(jsonstr);
+
+                    }
+                }
+                });
+
+
+
+
+        });
+
+        //initialize map
+        function init() {
+            var coordString="";
+            var streetCoordinates="";
+            @*//var coordString = '@Html.Raw(Model.EdgesToJson())';*@
+            var coordType = @((int)Model.GeometryType);
+            @*//var streetCoordinates = '@Html.Raw(Model.StreetView)';*@
+
+            map = initMap(coordString, coordType, document.getElementById('map'), '@Model.Id', '@Model.Name');
+            creator = new PolygonCreator(map);
+
+
+
+
+        }
+
+        function clearMap() {
+
+            creator.destroy();
+
+                creator = new PolygonCreator(map);
+
+
+
+        }
+
+    </script>
+
+
+}
