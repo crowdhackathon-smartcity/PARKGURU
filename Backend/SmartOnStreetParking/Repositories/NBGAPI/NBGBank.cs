@@ -35,7 +35,7 @@ namespace SmartOnStreetParking.Repositories.NBGAPI
         
 
        
-        public void RequestTransaction(NBGAuthenticationInfo NBGAuthInfo)
+        public Boolean RequestTransaction(NBGAuthenticationInfo NBGAuthInfo, string FromIBAN, string ToIBAN, string currency, double ammount)
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -55,9 +55,12 @@ namespace SmartOnStreetParking.Repositories.NBGAPI
 
             using (var content = new ByteArrayContent(byteData))
             {
+                string tmpBody =  string.Format("{ 'description': '{0}', 'challenge_type': '{1}', 'from': { '{2}': '{3}','bank_id': '{4}'}, 'to': { 'account_id': 'string{5}', 'bank_id': 'string{6}'},'value': { 'currency': 'string{7}','amount': { 8} } }", "Transaction Desr", "put", FromIBAN, "574b37a801759c440e77c3fe", ToIBAN, "574b37a801759c440e77c3fe", currency, ammount.ToString());
                 content.Headers.ContentType = new MediaTypeHeaderValue("< your content type, i.e. application/json >");
                 response = client.PutAsync(uri, content).Result;
             }
+
+            return true;
         }
 
     }

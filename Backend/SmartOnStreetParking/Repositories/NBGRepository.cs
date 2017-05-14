@@ -23,7 +23,7 @@ namespace SmartOnStreetParking.Repositories
             NBGObject.GetAllBanks();
         }
 
-        public Boolean MakeTransaction(string NBGAuthID, string NBGAuthToken, string FromIBAN, string ToIBAN, string currency, double ammount)
+        public void MakeTransaction(string NBGAuthID, string NBGAuthToken, string FromIBAN, string ToIBAN, string currency, double ammount)
         {
             //Set default values for demo usage
             //TODO : Remove this initialization code
@@ -34,8 +34,9 @@ namespace SmartOnStreetParking.Repositories
             NBGAuthInfo.OcpApimSubscriptionKey = NBGAuthToken;// "135d4237ab144da79fc3d3e577faa971";
 
             NBGHandler NBGObject = new NBGHandler(NBGAuthInfo);
-            NBGObject.requestTransaction();
-            return true;
+            Boolean result = NBGObject.requestTransaction(FromIBAN, ToIBAN, currency , ammount);
+
+            //return result;
 
         }
     }

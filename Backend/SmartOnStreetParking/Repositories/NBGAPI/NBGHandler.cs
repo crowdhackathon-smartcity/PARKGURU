@@ -39,11 +39,12 @@ namespace SmartOnStreetParking.Repositories.NBGClasses
             objCustomer.GetCustomersForBankID(bankID, AuthInfo);
         }
 
-        public void requestTransaction()
+        public Boolean requestTransaction(string FromIBAN, string ToIBAN, string currency, double ammount)
         {
             //bankID = "5710bba5d42604e4072d1e72
-            NBGBank objCustomer = new NBGBank();
-            objCustomer.RequestTransaction(AuthInfo);
+            NBGBank objBank = new NBGBank();
+            return objBank.RequestTransaction(AuthInfo, FromIBAN, ToIBAN, currency, ammount);
+
         }
 
     }
