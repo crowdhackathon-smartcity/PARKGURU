@@ -113,7 +113,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ApiKey, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ApiKey, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.ApiKey, new { htmlAttributes = new { @class = "form-control" , @readonly="readonly"} })
                                 @Html.ValidationMessageFor(model => model.ApiKey, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ApiSecret, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ApiSecret, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.ApiSecret, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                 @Html.ValidationMessageFor(model => model.ApiSecret, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                             @*@Html.LabelFor(model => model.RevenuePercentAsDev, htmlAttributes: new { @class = "control-label col-md-2" })*@
                             <label class="control-label col-md-2">Developer Commission(%)</label>
                             <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.RevenuePercentAsDev, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.TextBoxFor(model => model.RevenuePercentAsDev, new { @class = "form-control" } )
                                 @Html.ValidationMessageFor(model => model.RevenuePercentAsDev, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -147,28 +147,28 @@
 
                         <div class="form-group">
                             @*@Html.LabelFor(model => model.RevenuePercentAsProv, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label class="control-label col-md-2">Municipality Commission(%)</label>
+                            <label class="control-label col-md-2">Banking API Key</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.RevenuePercentAsProv, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.RevenuePercentAsProv, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.BankApiKey, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BankApiKey, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
                             @*@Html.LabelFor(model => model.RevenuePercentAsProv, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label class="control-label col-md-2">Municipality Commission(%)</label>
+                            <label class="control-label col-md-2">Banking API Secret</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.RevenuePercentAsProv, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.RevenuePercentAsProv, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.BankApiSecret, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BankApiSecret, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
                             @*@Html.LabelFor(model => model.RevenuePercentAsProv, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label class="control-label col-md-2">Municipality Commission(%)</label>
+                            <label class="control-label col-md-2">IBAN</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.RevenuePercentAsProv, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.RevenuePercentAsProv, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.IBAN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IBAN, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
