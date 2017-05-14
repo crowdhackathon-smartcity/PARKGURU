@@ -20,5 +20,7 @@ namespace SmartOnStreetParking.Repositories
         List<Payment> GetPayments(string VehiclePlate, string APIKey);
         Payment CheckPlate(string VehiclePlate, string APIKey);
 
+        bool TransferMoney(string DevAPIKey, string DevApiSecret, string DestinationIBAN, decimal Amount, string CurrencyCode);
+
     }
 }

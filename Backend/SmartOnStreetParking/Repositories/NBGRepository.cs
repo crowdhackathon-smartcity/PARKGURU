@@ -23,15 +23,15 @@ namespace SmartOnStreetParking.Repositories
             NBGObject.GetAllBanks();
         }
 
-        public Boolean MakeTransaction()
+        public Boolean MakeTransaction(string NBGAuthID, string NBGAuthToken, string FromIBAN, string ToIBAN, string currency, double ammount)
         {
             //Set default values for demo usage
             //TODO : Remove this initialization code
             NBGAPI.NBGAuthenticationInfo NBGAuthInfo = new NBGAPI.NBGAuthenticationInfo();
 
             NBGAuthInfo.AuthProviderName = "fakelogin";
-            NBGAuthInfo.AuthID = "123456789";
-            NBGAuthInfo.OcpApimSubscriptionKey = "135d4237ab144da79fc3d3e577faa971";
+            NBGAuthInfo.AuthID = NBGAuthID;// "123456789";
+            NBGAuthInfo.OcpApimSubscriptionKey = NBGAuthToken;// "135d4237ab144da79fc3d3e577faa971";
 
             NBGHandler NBGObject = new NBGHandler(NBGAuthInfo);
             NBGObject.requestTransaction();
