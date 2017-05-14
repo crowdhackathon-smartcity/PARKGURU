@@ -45,23 +45,28 @@ namespace SmartOnStreetParking.Web.Controllers
             ViewModel.CurrentAvailabilityState = AvailabilityState.High;
             ViewModel.GeometryType = GeometryType.Polygon;
 
-            List<SelectListItem> SelectItems = new List<SelectListItem>();
+            //List<SelectListItem> SelectItems = new List<SelectListItem>();
 
-            IGeneralRepository GenRep = new GeneralRepository();
-            List<dynamic> ZoneResults = GenRep.GetZonesLight(GetMember().Id);
+            //IGeneralRepository GenRep = new GeneralRepository();
+            //List<dynamic> ZoneResults = GenRep.GetZonesLight(GetMember().Id);
 
-            ZoneResults.ForEach((v) =>
-            {
-                SelectItems.Add(new SelectListItem()
-                {
-                    Value = v.Id.ToString(),
-                    Text = v.Name
-                });
-            });
-            ViewBag.ZoneList = SelectItems;
+            //ZoneResults.ForEach((v) =>
+            //{
+            //    SelectItems.Add(new SelectListItem()
+            //    {
+            //        Value = v.Id.ToString(),
+            //        Text = v.Name
+            //    });
+            //});
+            ViewBag.ZoneList = LoadZones(GetMember().Id);
 
             return View(ViewModel);
         }
+
+
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -124,7 +129,7 @@ namespace SmartOnStreetParking.Web.Controllers
         public ActionResult StartImport()
         {
             StartImportViewModel ViewModel = new StartImportViewModel();
-            
+            ViewBag.ZoneList = LoadZones(GetMember().Id);
 
             return View(ViewModel);
         }
@@ -181,7 +186,23 @@ namespace SmartOnStreetParking.Web.Controllers
             return View(ViewModel);
         }
 
+        private List<SelectListItem> LoadZones(long MemberId)
+        {
+            List<SelectListItem> SelectItems = new List<SelectListItem>();
 
+            IGeneralRepository GenRep = new GeneralRepository();
+            List<dynamic> ZoneResults = GenRep.GetZonesLight(GetMember().Id);
+
+            ZoneResults.ForEach((v) =>
+            {
+                SelectItems.Add(new SelectListItem()
+                {
+                    Value = v.Id.ToString(),
+                    Text = v.Name
+                });
+            });
+            return SelectItems;
+        }
     }
 
     public class CustomContractResolver : DefaultContractResolver
@@ -203,5 +224,10 @@ namespace SmartOnStreetParking.Web.Controllers
             var resolved = this.PropertyMappings.TryGetValue(propertyName, out resolvedName);
             return (resolved) ? resolvedName : base.ResolvePropertyName(propertyName);
         }
+
+
+
+
+
     }
 }
