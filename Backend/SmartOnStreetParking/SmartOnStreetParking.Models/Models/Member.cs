@@ -62,6 +62,10 @@ namespace SmartOnStreetParking.Models
         [Column("Member_RevenuePercentAsProv")]
         public decimal RevenuePercentAsProv { get; set; }
 
+        
+
+
+
         [JsonIgnore]
         public virtual ICollection<Zone> Zones { get; set; }
     }
