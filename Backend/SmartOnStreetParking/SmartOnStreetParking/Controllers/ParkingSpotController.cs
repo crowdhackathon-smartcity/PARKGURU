@@ -44,9 +44,21 @@ namespace SmartOnStreetParking.Web.Controllers
             AddParkingSpotViewModel ViewModel = new AddParkingSpotViewModel();
             ViewModel.CurrentAvailabilityState = AvailabilityState.High;
             ViewModel.GeometryType = GeometryType.Polygon;
-            //ViewModel.MemberId = GetMember().Id;
-            //ViewModel.ParkingMaxDuration = 360;
-            //ViewModel.IsPayingZone = true;
+
+            List<SelectListItem> SelectItems = new List<SelectListItem>();
+
+            IGeneralRepository GenRep = new GeneralRepository();
+            List<dynamic> ZoneResults = GenRep.GetZonesLight(GetMember().Id);
+
+            ZoneResults.ForEach((v) =>
+            {
+                SelectItems.Add(new SelectListItem()
+                {
+                    Value = v.Id.ToString(),
+                    Text = v.Name
+                });
+            });
+            ViewBag.ZoneList = SelectItems;
 
             return View(ViewModel);
         }
