@@ -10,7 +10,9 @@ import project.smartcity.com.smartcityapp.models.SearchRequest;
 import project.smartcity.com.smartcityapp.models.Tickets;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by dimitris
@@ -27,6 +29,9 @@ public interface RestInterface {
 
     @POST("Default/Pay")
     Call<PaymentResponse> createPayment(@Body PaymentRequest paymentRequest);
+
+    @GET("Default/GetPayments")
+    Call<ArrayList<PaymentResponse>> getPayments(@Query("VehiclePlate") String vehiclePlate, @Query("APIKey") String apiKey);
 
 
 

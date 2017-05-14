@@ -17,24 +17,6 @@
         android:layout_weight="2"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/zone_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="zone name"
-            android:textColor="@color/black_dark"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="address"
-            android:textColor="@color/black_dark"
-            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/time_parked"

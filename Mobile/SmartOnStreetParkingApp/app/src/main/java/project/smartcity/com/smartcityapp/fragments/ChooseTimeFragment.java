@@ -113,10 +113,12 @@ public class ChooseTimeFragment extends Fragment implements BlockingStep {
             dataManager.saveUserTicket(userTicket);
             //continue
             Realm realm = Realm.getDefaultInstance();
+
+
             realm.beginTransaction();
             Plates plates = new Plates();
             plates.setPlates(plateNumberTxt);
-            realm.copyToRealmOrUpdate(plates);
+            realm.insertOrUpdate(plates);
             realm.commitTransaction();
 
             //call compute ticket  for the user selection of the user
